@@ -6,11 +6,11 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# The 3D models never change between deploys of the same file name: let browsers cache them.
+# 3D models: browsers check for a newer version instead of reusing an old saved copy.
 [[headers]]
   for = "/*.glb"
   [headers.values]
-    Cache-Control = "public, max-age=604800"
+    Cache-Control = "public, max-age=0, must-revalidate"
     Content-Type = "model/gltf-binary"
 
 [dev]
