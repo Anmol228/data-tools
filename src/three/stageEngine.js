@@ -6,6 +6,7 @@ import { tileSets, loadOverride } from "../lib/logos.js";
 import { sfx } from "../lib/sfx.js";
 import { getState, setState, subscribe, select, step, changeCategory, registerEngine } from "../store.js";
 
+const MODEL_VERSION = 2;
 // ---------- The 3D stage (three.js), unchanged from the original page ----------
 // React mounts this once into the stage element. It reads the shared store (page, selection,
 // tier filter) and reports back through store actions (select, page change, loading progress).
@@ -276,8 +277,8 @@ export function initStage(stage, hoverLabel) {
 
   async function loadModel(file, k) {
     let bytes;
-    const glb = await fetch(file).catch(() => null);
-    if (glb && glb.ok) {
+    const glb = await fetch(`${file}?v=${MODEL_VERSION}`, { cache: "no-cache" }).catch(() => null);  
+      if (glb && glb.ok) {
       bytes = await readWithProgress(glb, k);
     } else {
       // One text copy, or for very large models several numbered parts joined back together.
