@@ -1072,3 +1072,598 @@ export const TRENDS = [{"cat": "etl", "label": "ETL / ELT", "source": "Google Tr
 
 export const MONTHLY = {"etl": {"sheet": "Monthly - ETL", "title": "ETL / ELT - monthly Google search interest (Apr-Sep 2026)", "method": "Index: Fivetran's 6-month average = 100, so all tools are on one scale. Worldwide web search; weekly data averaged by month (weeks assigned by start date).", "source": "Source: Google Trends (trends.google.com), retrieved 4 Oct 2026. Informatica and SSIS use Google topics to avoid unrelated searches.", "unit": "Search interest (Fivetran 6-month avg = 100)", "popLabel": "6-month average", "popUnit": "search index", "growthLabel": "Change Apr to Sep", "months": ["Apr", "May", "Jun", "Jul", "Aug", "Sep"], "tools": [{"name": "Informatica (PowerCenter / IDMC)", "m": [311.8, 295.7, 311.8, 234.6, 203.9, 214.3], "pop": 262.02, "growth": -0.3127}, {"name": "Alteryx", "m": [216.7, 222, 192.9, 173.6, 149.6, 164], "pop": 186.47, "growth": -0.2432}, {"name": "Boomi", "m": [185.5, 186.4, 192.2, 192.9, 163.2, 148.4], "pop": 178.1, "growth": -0.2}, {"name": "AWS Glue", "m": [157.3, 187, 171.4, 110.6, 68.3, 61.6], "pop": 126.03, "growth": -0.6084}, {"name": "SQL Server Integration Services (SSIS)", "m": [149.3, 149.5, 130, 118.8, 99.9, 94.5], "pop": 123.67, "growth": -0.367}, {"name": "Fivetran", "m": [128.4, 114, 111.3, 108.3, 76, 64.6], "pop": 100.43, "growth": -0.4969}, {"name": "Azure Data Factory", "m": [134.3, 132.4, 112, 80.1, 49.9, 50.5], "pop": 93.2, "growth": -0.624}, {"name": "Apache NiFi", "m": [104.6, 135.3, 126.1, 82.4, 39.8, 27.5], "pop": 85.95, "growth": -0.7371}, {"name": "Talend", "m": [115.8, 93.2, 89, 76.4, 62.3, 69.7], "pop": 84.4, "growth": -0.3981}, {"name": "Debezium", "m": [108.3, 103.3, 129.9, 83.8, 40.4, 34.1], "pop": 83.3, "growth": -0.6851}, {"name": "Airbyte", "m": [127.6, 110.4, 97.9, 63.8, 39.8, 34.1], "pop": 78.93, "growth": -0.7328}, {"name": "Stitch", "m": [92, 112.8, 94.2, 51.2, 42.1, 49.7], "pop": 73.67, "growth": -0.4598}, {"name": "Supermetrics", "m": [45.3, 48.7, 49, 46, 41.6, 37.8], "pop": 44.73, "growth": -0.1656}, {"name": "Pentaho Data Integration", "m": [56.4, 58.8, 56.4, 45.3, 26.1, 20], "pop": 43.83, "growth": -0.6454}, {"name": "SAP Data Services", "m": [43.8, 54.6, 52.7, 31.9, 19.6, 21.5], "pop": 37.35, "growth": -0.5091}, {"name": "IBM DataStage", "m": [31.6, 35, 34.6, 26.5, 19.6, 21.4], "pop": 28.12, "growth": -0.3228}, {"name": "Oracle GoldenGate", "m": [35.5, 37.4, 32.5, 25.4, 17.9, 13.2], "pop": 26.98, "growth": -0.6282}, {"name": "Google Cloud Data Fusion", "m": [32.6, 41, 37.1, 20.8, 14.8, 11.9], "pop": 26.37, "growth": -0.635}, {"name": "Matillion", "m": [37.8, 26.1, 25.2, 29.7, 21.4, 16.3], "pop": 26.08, "growth": -0.5688}, {"name": "SnapLogic", "m": [23, 21.4, 21.5, 20, 16.6, 12.6], "pop": 19.18, "growth": -0.4522}, {"name": "Apache Hop", "m": [14.8, 16.6, 17.8, 11.1, 8.9, 7.4], "pop": 12.77, "growth": -0.5}, {"name": "Qlik Replicate", "m": [20, 13.7, 10.4, 10.4, 4.7, 5.9], "pop": 10.85, "growth": -0.705}, {"name": "Google Cloud Dataflow", "m": [13.2, 14.7, 14.3, 9.2, 3.3, 1], "pop": 9.28, "growth": -0.9242}, {"name": "Hevo Data", "m": [17.1, 8.3, 7.4, 9.6, 5.9, 5.9], "pop": 9.03, "growth": -0.655}, {"name": "Striim", "m": [10.4, 8.3, 8.9, 7.4, 8.9, 6.7], "pop": 8.43, "growth": -0.3558}, {"name": "Adverity", "m": [9.6, 7.7, 8.9, 7.4, 8.3, 8.2], "pop": 8.35, "growth": -0.1458}, {"name": "Meltano", "m": [7.4, 7.1, 10.4, 8.2, 4.7, 4.5], "pop": 7.05, "growth": -0.3919}, {"name": "Estuary Flow", "m": [8.2, 7.1, 8.9, 6.7, 3.6, 3], "pop": 6.25, "growth": -0.6341}, {"name": "Funnel", "m": [5.9, 5.9, 7.4, 4.5, 5.3, 3], "pop": 5.33, "growth": -0.4915}, {"name": "Integrate.io", "m": [13.4, 4.2, 3.7, 4.5, 1.8, 0.7], "pop": 4.72, "growth": -0.9478}, {"name": "Oracle Data Integrator", "m": [5.1, 5.7, 4.1, 4.1, 4.1, 3.1], "pop": 4.37, "growth": -0.3922}, {"name": "Skyvia", "m": [7.4, 4.7, 5.2, 4.5, 1.8, 3], "pop": 4.43, "growth": -0.5946}, {"name": "Keboola", "m": [3.7, 3.6, 6.7, 4.5, 3.6, 2.2], "pop": 4.05, "growth": -0.4054}, {"name": "dlt (dltHub)", "m": [4.5, 4.2, 3.7, 3.7, 2.4, 0.7], "pop": 3.2, "growth": -0.8444}, {"name": "CloverDX", "m": [5.9, 3.6, 3.7, 2.2, 0.6, 0.7], "pop": 2.78, "growth": -0.8814}], "missing": [{"name": "Singer", "note": "Not enough Google search volume"}, {"name": "Portable", "note": "Not enough Google search volume"}]}, "orch": {"sheet": "Monthly - Orchestration", "title": "Process Orchestration - monthly PyPI downloads (Apr-Sep 2026)", "method": "April covers 6-30 Apr only (PyPI keeps 180 days), so change is compared per day: (Sep / 30) vs (Apr / 25).", "source": "Source: pypistats.org (official Python package downloads, excluding mirrors), retrieved 4 Oct 2026.", "unit": "PyPI downloads per month", "popLabel": "6-month total downloads", "popUnit": "downloads", "growthLabel": "Change Apr to Sep (per day)", "months": ["Apr", "May", "Jun", "Jul", "Aug", "Sep"], "tools": [{"name": "Temporal", "m": [23617193, 30040719, 32628282, 30447372, 35242255, 38709381], "pop": 190685202, "growth": 0.3659}, {"name": "Apache Airflow", "m": [17088297, 20926903, 21164447, 22498014, 17434926, 7445726], "pop": 106558313, "growth": -0.6369}, {"name": "Kubeflow Pipelines", "m": [11280707, 15084218, 15676643, 16380549, 14481701, 10924844], "pop": 83828662, "growth": -0.193}, {"name": "Prefect", "m": [10107365, 14463693, 12975048, 12401020, 13180745, 6916199], "pop": 70044070, "growth": -0.4298}, {"name": "Dagster", "m": [5851770, 7269531, 8057955, 9635404, 9869029, 8098916], "pop": 48782605, "growth": 0.1533}, {"name": "Kestra", "m": [555978, 1256801, 1349102, 2877619, 9212045, 11564707], "pop": 26816252, "growth": 16.3339}, {"name": "Luigi", "m": [1056912, 5611383, 4136158, 1273450, 1142719, 959522], "pop": 14180144, "growth": -0.2435}, {"name": "Windmill", "m": [1973177, 2492046, 2230005, 835660, 902924, 935329], "pop": 9369141, "growth": -0.605}, {"name": "Metaflow", "m": [582768, 721026, 824672, 927167, 715978, 484062], "pop": 4255673, "growth": -0.3078}, {"name": "Flyte", "m": [391092, 543218, 417718, 518071, 675937, 466490], "pop": 3012526, "growth": -0.006}, {"name": "ZenML", "m": [78883, 84632, 111917, 197111, 267324, 165983], "pop": 905850, "growth": 0.7535}, {"name": "Mage", "m": [55808, 50267, 38390, 45367, 35364, 11568], "pop": 236764, "growth": -0.8273}, {"name": "Apache DolphinScheduler", "m": [508, 748, 953, 561, 770, 732], "pop": 4272, "growth": 0.2008}], "missing": []}, "bi": {"sheet": "Monthly - BI", "title": "Business Intelligence - monthly npm SDK downloads (Apr-Sep 2026)", "method": "Downloads of each vendor's official embedding SDK. Full calendar months. npm has a few days with no recorded data (shown as 0 by npm) in every series.", "source": "Source: api.npmjs.org/downloads/range/2026-04-01:2026-09-30/<package>, retrieved 4 Oct 2026; daily totals cross-checked against npm point totals.", "unit": "npm SDK downloads per month", "popLabel": "6-month total downloads", "popUnit": "downloads", "growthLabel": "Change Apr to Sep", "months": ["Apr", "May", "Jun", "Jul", "Aug", "Sep"], "tools": [{"name": "Microsoft Power BI", "m": [1355711, 1324824, 1465593, 1632556, 1546527, 1526994], "pop": 8852205, "growth": 0.1263}, {"name": "Apache Superset", "m": [470242, 484881, 648371, 840976, 923396, 937124], "pop": 4304990, "growth": 0.9929}, {"name": "Amazon QuickSight", "m": [635580, 614159, 695636, 773195, 713703, 854054], "pop": 4286327, "growth": 0.3437}, {"name": "ThoughtSpot", "m": [180334, 203183, 216232, 345029, 373125, 381261], "pop": 1699164, "growth": 1.1142}, {"name": "Omni", "m": [252821, 333882, 297343, 289768, 258856, 253738], "pop": 1686408, "growth": 0.0036}, {"name": "Looker", "m": [180839, 220172, 242505, 199805, 212010, 387568], "pop": 1442899, "growth": 1.1432}, {"name": "Metabase", "m": [163195, 183520, 223512, 268747, 269671, 236918], "pop": 1345563, "growth": 0.4517}, {"name": "Tableau", "m": [155967, 174697, 186549, 222067, 220739, 196505], "pop": 1156524, "growth": 0.2599}, {"name": "Sigma Computing", "m": [115872, 185199, 111916, 141056, 126627, 97027], "pop": 777697, "growth": -0.1626}, {"name": "Lightdash", "m": [41480, 63048, 67170, 93012, 236657, 233740], "pop": 735107, "growth": 4.635}, {"name": "GoodData", "m": [34482, 44535, 47560, 66438, 53683, 55112], "pop": 301810, "growth": 0.5983}, {"name": "Preset", "m": [19776, 26725, 30947, 28125, 25395, 26319], "pop": 157287, "growth": 0.3309}, {"name": "Sisense", "m": [20424, 20428, 24384, 28850, 15671, 12310], "pop": 122067, "growth": -0.3973}, {"name": "Qlik Sense", "m": [32763, 23076, 20671, 9256, 10956, 11159], "pop": 107881, "growth": -0.6594}], "missing": []}};
 
+// ---------- Five more segments: Tools + Pricing sheets of the workbook (v6), rows 95-144 ----------
+export const TRANSFORM_TOOLS = [
+ {
+  "n": 95,
+  "cat": "Transformation",
+  "name": "dbt",
+  "url": "https://www.getdbt.com",
+  "sum": "dbt is a platform for building and transforming data pipelines in SQL, with real-time validation and stateful awareness of what has changed. It speeds development with features such as automatic refactoring of models and columns, and lowers warehouse costs by building only the models that need updating. It is used for analytics engineering, building data foundations for AI and optimizing warehouse costs.",
+  "code": "DB",
+  "tier": "Free + Paid",
+  "price": "Developer: Free. Starter: $100 per user/month. Enterprise / Enterprise+: Custom",
+  "priceUrl": "https://www.getdbt.com/pricing"
+ },
+ {
+  "n": 96,
+  "cat": "Transformation",
+  "name": "SQLMesh",
+  "url": "https://sqlmesh.com",
+  "sum": "SQLMesh is a data transformation tool that semantically understands the SQL you write and provides virtual data environments and automated data contracts. It catches issues at compile time, reduces cloud costs through virtual environments and supports safe collaboration. It is used in data warehouse transformation and orchestration, including by teams already using dbt that want to keep their existing workflows.",
+  "code": "SQ",
+  "tier": "Free",
+  "price": "Free (open source)",
+  "priceUrl": "https://sqlmesh.com"
+ },
+ {
+  "n": 97,
+  "cat": "Transformation",
+  "name": "Coalesce",
+  "url": "https://coalesce.io",
+  "sum": "Coalesce is a data operating layer that combines data transformation, cataloging and quality monitoring in one platform, governing human engineers and AI agents under the same standards. Consolidating these tools reduces coordination overhead between separate platforms. It is used for migrating pipelines from legacy systems, building AI-ready data foundations and developing governed pipelines quickly.",
+  "code": "CO",
+  "tier": "Free + Paid",
+  "price": "Developer: Free. Starter: $150 per user/month (billed annually). Enterprise / Business Critical: Custom",
+  "priceUrl": "https://coalesce.io/pricing/"
+ },
+ {
+  "n": 98,
+  "cat": "Transformation",
+  "name": "Dataform",
+  "url": "https://cloud.google.com/dataform",
+  "sum": "Dataform is a Google Cloud service for developing, testing, version-controlling and scheduling SQL data transformation workflows in BigQuery. It manages the transformation step of ELT with Git integration and automated data quality tests. It is used to turn raw source data into documented, tested tables and to coordinate complex, multi-person transformation workflows with dependency management.",
+  "code": "DA",
+  "tier": "Free",
+  "price": "Free service (associated BigQuery and other Google Cloud costs apply)",
+  "priceUrl": "https://cloud.google.com/dataform/pricing"
+ },
+ {
+  "n": 99,
+  "cat": "Transformation",
+  "name": "Apache Spark",
+  "url": "https://spark.apache.org",
+  "sum": "Apache Spark is an open-source, multi-language engine (Python, SQL, Scala, Java, R) for data engineering, data science and machine learning on single machines or clusters. It provides unified, scalable processing of batch and real-time streaming data, including a distributed ANSI SQL engine. It is used for large-scale exploratory analysis, training ML models that scale from a laptop to thousands of machines, SQL analytics and batch or streaming data processing.",
+  "code": "SP",
+  "tier": "Free",
+  "price": "Free (open source, Apache License 2.0)",
+  "priceUrl": "https://spark.apache.org"
+ }
+];
+
+export const TRANSFORM_MESH = ["dbt", "SQLMesh", "Coalesce", "Dataform", "Apache_Spark"];
+
+export const TRANSFORM_FILES = ["transformation_glass.glb"];
+
+export const STREAM_TOOLS = [
+ {
+  "n": 100,
+  "cat": "Streaming",
+  "name": "Apache Kafka",
+  "url": "https://kafka.apache.org",
+  "sum": "Apache Kafka is an open-source distributed event streaming platform for high-performance data pipelines, streaming analytics and data integration. It provides permanent storage, scales to trillions of messages per day and includes built-in stream processing. It is used for critical applications in manufacturing, banking, insurance, telecommunications, transportation and energy.",
+  "code": "KA",
+  "tier": "Free",
+  "price": "Free (open source, Apache License v2)",
+  "priceUrl": "https://kafka.apache.org"
+ },
+ {
+  "n": 101,
+  "cat": "Streaming",
+  "name": "Confluent",
+  "url": "https://www.confluent.io",
+  "sum": "Confluent is a data streaming platform built on Apache Kafka and Apache Flink to stream, connect, process and govern data in real time. It replaces point-to-point, batch and streaming pipelines with one platform and cleans data at the source to prevent downstream delays and quality issues. It is used for event-driven microservices, fraud detection, real-time dashboards, generative AI that needs fresh data and observability pipelines.",
+  "code": "CO",
+  "tier": "Free + Paid",
+  "price": "Basic: from $0/month. Standard: from ~$385/month. Enterprise: from ~$895/month. Freight: from $2,300/month. Dedicated: Price not specified",
+  "priceUrl": "https://www.confluent.io/confluent-cloud/pricing/"
+ },
+ {
+  "n": 102,
+  "cat": "Streaming",
+  "name": "Apache Flink",
+  "url": "https://flink.apache.org",
+  "sum": "Apache Flink is an open-source framework and distributed engine for stateful computations over unbounded and bounded data streams. It offers exactly-once state consistency, event-time processing and in-memory performance at scale. It is used for event-driven applications, stream and batch analytics, and data pipelines and ETL.",
+  "code": "FL",
+  "tier": "Free",
+  "price": "Free (open source, Apache License v2)",
+  "priceUrl": "https://flink.apache.org"
+ },
+ {
+  "n": 103,
+  "cat": "Streaming",
+  "name": "Apache Pulsar",
+  "url": "https://pulsar.apache.org",
+  "sum": "Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud. It scales horizontally without reshuffling data, supports multi-tenancy and handles up to a million topics in one cluster. It is used for distributed work queues, large ordered data streams, geo-replicated systems that must survive zone outages and serverless function processing.",
+  "code": "PU",
+  "tier": "Free",
+  "price": "Free (open source, Apache License 2.0)",
+  "priceUrl": "https://pulsar.apache.org"
+ },
+ {
+  "n": 104,
+  "cat": "Streaming",
+  "name": "Amazon Kinesis",
+  "url": "https://aws.amazon.com/kinesis/",
+  "sum": "Amazon Kinesis is a fully managed AWS service to collect, process and analyze real-time data and video streams. It ingests, buffers and processes streaming data so insights arrive in minutes rather than days. It is used for real-time fraud detection and monitoring, moving batch analytics to real time, processing IoT sensor data with alerts and video analytics.",
+  "code": "KI",
+  "tier": "Paid",
+  "price": "Data Streams On-Demand Standard: $0.08 per GB ingested, $0.040 per GB retrieved, $0.040 per stream-hour. Provisioned: $0.015 per shard-hour (US East)",
+  "priceUrl": "https://aws.amazon.com/kinesis/data-streams/pricing/"
+ },
+ {
+  "n": 105,
+  "cat": "Streaming",
+  "name": "Google Cloud Pub/Sub",
+  "url": "https://cloud.google.com/pubsub",
+  "sum": "Pub/Sub is Google Cloud's asynchronous, scalable messaging service that decouples services that produce messages from services that process them. Publishers broadcast events to many subscribers without waiting for processing to finish. It is used for streaming analytics pipelines, enterprise event distribution, parallel task processing, IoT ingestion and database replication.",
+  "code": "PS",
+  "tier": "Free + Paid",
+  "price": "First 10 GiB/month throughput: Free. Then $40 per TiB",
+  "priceUrl": "https://cloud.google.com/pubsub/pricing"
+ },
+ {
+  "n": 106,
+  "cat": "Streaming",
+  "name": "Azure Event Hubs",
+  "url": "https://azure.microsoft.com/en-us/products/event-hubs",
+  "sum": "Azure Event Hubs is a fully managed, real-time data streaming platform that ingests millions of events per second and supports the Apache Kafka, AMQP 1.0 and HTTPS protocols. It removes infrastructure management and integrates with Azure services such as Stream Analytics and Azure Functions. It is used for IoT telemetry, real-time analytics, application logging, clickstream analytics, financial transactions and event sourcing.",
+  "code": "EH",
+  "tier": "Paid",
+  "price": "Basic / Standard / Premium / Dedicated: Price not specified (rates shown via Azure calculator only)",
+  "priceUrl": "https://azure.microsoft.com/en-us/pricing/details/event-hubs/"
+ },
+ {
+  "n": 107,
+  "cat": "Streaming",
+  "name": "Redpanda",
+  "url": "https://www.redpanda.com",
+  "sum": "Redpanda is a data streaming platform with an agentic data plane for managing real-time data flows and governing AI agents. It enforces agent access policies, keeps auditable records of agent actions and lets administrators restrict or stop agents. It is used for real-time data ingestion and securing AI agent access to sensitive data in financial services, technology and manufacturing.",
+  "code": "RE",
+  "tier": "Free + Paid",
+  "price": "Community Edition: Free. Serverless / BYOC / Enterprise Edition: Price not specified",
+  "priceUrl": "https://www.redpanda.com/pricing"
+ },
+ {
+  "n": 108,
+  "cat": "Streaming",
+  "name": "Apache Beam",
+  "url": "https://beam.apache.org",
+  "sum": "Apache Beam is an open-source unified programming model with language-specific SDKs for defining batch and streaming data processing pipelines. Pipelines are written once and run on multiple engines, including Apache Flink, Apache Spark and Google Cloud Dataflow. It is used for real-time streaming analytics, machine learning feature generation, security log processing and financial risk calculations.",
+  "code": "BE",
+  "tier": "Free",
+  "price": "Free (open source)",
+  "priceUrl": "https://beam.apache.org"
+ },
+ {
+  "n": 109,
+  "cat": "Streaming",
+  "name": "Materialize",
+  "url": "https://materialize.com",
+  "sum": "Materialize uses SQL to turn siloed operational data into continuously updated, real-time data products. Agents and applications get fresh results with single-digit-millisecond latency while heavy queries move off operational databases. It is used to give AI agents current context, build interactive search pipelines, power event-driven architectures and run data-intensive user interfaces.",
+  "code": "MA",
+  "tier": "Free + Paid",
+  "price": "Community License (self-managed): Free forever. Cloud On-Demand / Cloud Capacity: $1.50 per Compute Credit. Enterprise License: Custom",
+  "priceUrl": "https://materialize.com/pricing/"
+ },
+ {
+  "n": 110,
+  "cat": "Streaming",
+  "name": "RisingWave",
+  "url": "https://risingwave.com",
+  "sum": "RisingWave is a distributed SQL streaming platform that ingests, transforms and serves real-time data using PostgreSQL-compatible SQL. Combining ingestion, processing and serving in one system removes the need for separate databases, caches and message queues. It is used for fraud detection, monitoring and alerting, real-time enrichment, IoT telemetry and continuous loading into Apache Iceberg tables.",
+  "code": "RI",
+  "tier": "Free + Paid",
+  "price": "Self-managed (Apache 2.0): Free. Basic: from $0.227 per RWU/hour. Pro: Price not specified",
+  "priceUrl": "https://risingwave.com/pricing/"
+ }
+];
+
+export const STREAM_MESH = ["Apache_Kafka", "Confluent", "Apache_Flink", "Apache_Pulsar", "Amazon_Kinesis", "Google_Cloud_Pub-Sub", "Azure_Event_Hubs", "Redpanda", "Apache_Beam", "Materialize", "RisingWave"];
+
+export const STREAM_FILES = ["streaming_glass.glb"];
+
+export const STORE_TOOLS = [
+ {
+  "n": 111,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Snowflake",
+  "url": "https://www.snowflake.com",
+  "sum": "Snowflake is a fully managed cloud data platform for data management and AI workloads across cloud environments. It unifies data across systems, supports building AI applications and gives large numbers of users concurrent data access. It is used in retail for customer personalization, in healthcare to unify research and commercial data, and in manufacturing for BI agents answering operational questions.",
+  "code": "SN",
+  "tier": "Paid",
+  "price": "Standard / Enterprise / Business Critical / Virtual Private Snowflake: Price not specified (consumption-based; free trial)",
+  "priceUrl": "https://www.snowflake.com/en/pricing-options/"
+ },
+ {
+  "n": 112,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Databricks",
+  "url": "https://www.databricks.com",
+  "sum": "Databricks is a unified data, analytics and AI platform that combines data management, business intelligence, governance and machine learning. Teams build data pipelines, analytics, applications and AI agents on one system instead of separate tools. It is used for batch and streaming data engineering, serverless SQL data warehousing, production AI agents grounded in company data and AI-assisted dashboards.",
+  "code": "DA",
+  "tier": "Free + Paid",
+  "price": "Free Edition / Community Edition: Free. Paid: Price not specified on page (pay-as-you-go DBUs)",
+  "priceUrl": "https://www.databricks.com/product/pricing"
+ },
+ {
+  "n": 113,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Google BigQuery",
+  "url": "https://cloud.google.com/bigquery",
+  "sum": "BigQuery is a fully managed, serverless Google Cloud data platform for managing and analyzing data, with built-in machine learning, search, geospatial analysis and BI. Separate compute and storage scale independently, letting users query terabytes in seconds and petabytes in minutes with SQL or Python. It serves analysts tuning large queries, administrators setting dataset-, table-, column- and row-level security, and data scientists building ML models in place.",
+  "code": "BI",
+  "tier": "Free + Paid",
+  "price": "First 1 TiB queries & 10 GiB storage/month: Free. On-demand: $6.25 per TiB. Active logical storage: $0.000031507 per GiB-hour",
+  "priceUrl": "https://cloud.google.com/bigquery/pricing"
+ },
+ {
+  "n": 114,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Amazon Redshift",
+  "url": "https://aws.amazon.com/redshift/",
+  "sum": "Amazon Redshift is a fully managed, petabyte-scale cloud data warehouse service on AWS, available as serverless or provisioned. It loads data from sources such as Amazon S3, can query an S3 data lake without loading data, and supports building ML models in SQL through Redshift ML. It is used for SQL analytics on warehouse and data lake data to find business insights.",
+  "code": "RE",
+  "tier": "Paid",
+  "price": "Serverless: $0.375 per RPU-hour. Provisioned: starts at $0.543 per hour ($300 credit / free trial)",
+  "priceUrl": "https://aws.amazon.com/redshift/pricing/"
+ },
+ {
+  "n": 115,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Azure Synapse Analytics",
+  "url": "https://azure.microsoft.com/en-us/products/synapse-analytics",
+  "sum": "Azure Synapse is an enterprise analytics service that combines SQL data warehousing, Apache Spark, Data Explorer for log and time-series analytics, and Pipelines for data integration in one studio. It removes barriers between SQL and Spark and offers serverless and dedicated resource models. It is used for data warehousing, big data preparation and ETL/ELT, machine learning, near real-time log analytics and IoT analytics.",
+  "code": "SA",
+  "tier": "Paid",
+  "price": "Price not specified (rates shown via Azure calculator only)",
+  "priceUrl": "https://azure.microsoft.com/en-us/pricing/details/synapse-analytics/"
+ },
+ {
+  "n": 116,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Microsoft Fabric",
+  "url": "https://www.microsoft.com/en-us/microsoft-fabric",
+  "sum": "Microsoft Fabric is an all-in-one analytics SaaS platform that unifies Data Engineering, Data Factory, Data Science, Real-Time Intelligence, Data Warehouse, Databases and Power BI over shared OneLake storage. It provides end-to-end workflows without integrating separate services, zero-copy data access across workloads, Copilot assistance and central governance through the OneLake Catalog. It is used for data ingestion and transformation, real-time IoT and log processing, ML model development and BI reporting by teams working on shared data.",
+  "code": "FA",
+  "tier": "Paid",
+  "price": "F2-F8192 capacity: Price not specified (rates shown via Azure calculator only; free trial)",
+  "priceUrl": "https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/"
+ },
+ {
+  "n": 117,
+  "cat": "Storage / Warehouse / Query",
+  "name": "ClickHouse",
+  "url": "https://clickhouse.com",
+  "sum": "ClickHouse is an open-source, column-oriented database management system for generating analytical reports in real time with SQL. Column-oriented storage makes analytical queries much faster than in row-oriented databases. It is used for real-time analytics, observability (logs, metrics and traces), data warehousing and machine learning workloads that need millisecond queries on large datasets.",
+  "code": "CL",
+  "tier": "Free + Paid",
+  "price": "Open source distribution: Free. Basic: from $53/month. Scale: from $437/month. Enterprise: from $571/month",
+  "priceUrl": "https://clickhouse.com/pricing"
+ },
+ {
+  "n": 118,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Firebolt",
+  "url": "https://www.firebolt.io",
+  "sum": "Firebolt is an open-source analytical database that runs as a single binary on a laptop and scales to hundreds of nodes and petabytes in the cloud. It behaves consistently whether deployed locally, on Kubernetes or in the cloud. It is used for real-time analytics, batch processing and ELT, with support for formats such as Iceberg and Parquet.",
+  "code": "FI",
+  "tier": "Free + Paid",
+  "price": "Open source (Preview): Free. Managed: compute $0.92/hour (S-node example), storage $0.0264/GB-month",
+  "priceUrl": "https://www.firebolt.io/pricing"
+ },
+ {
+  "n": 119,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Teradata",
+  "url": "https://www.teradata.com",
+  "sum": "Teradata is an AI and data platform that combines data management, AI operationalization and automated decision-making across cloud, hybrid and on-premises environments. It turns enterprise data into real-time decisions at scale. It is used in regulated industries such as banking, airlines and telecommunications for fraud prevention, customer experience, finance transformation and supply chain logistics.",
+  "code": "TE",
+  "tier": "Paid",
+  "price": "Price not specified (Fixed + Flex packages)",
+  "priceUrl": "https://www.teradata.com/pricing"
+ },
+ {
+  "n": 120,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Apache Iceberg",
+  "url": "https://iceberg.apache.org",
+  "sum": "Apache Iceberg is an open table format for very large analytic tables that supports SQL merges, updates and deletes. Multiple engines, including Spark, Trino, Flink and Hive, can work safely with the same tables at the same time. It is used for analytics workloads that need schema evolution, time-travel queries and compaction without rewriting tables.",
+  "code": "IC",
+  "tier": "Free",
+  "price": "Free (open source, Apache project)",
+  "priceUrl": "https://iceberg.apache.org"
+ },
+ {
+  "n": 121,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Delta Lake",
+  "url": "https://delta.io",
+  "sum": "Delta Lake is an open-source storage framework for building a format-agnostic lakehouse that works with multiple compute engines and languages. It provides ACID transactions, scalable metadata, time travel and unified batch and streaming processing to protect data integrity. It is used for ETL, data warehousing and machine learning in lakehouse architectures.",
+  "code": "DL",
+  "tier": "Free",
+  "price": "Free (open source, Linux Foundation project)",
+  "priceUrl": "https://delta.io"
+ },
+ {
+  "n": 122,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Apache Hudi",
+  "url": "https://hudi.apache.org",
+  "sum": "Apache Hudi is an open data lakehouse platform built on an open table format that brings database functionality to data lakes. It supports incremental processing and automated table services that keep tables optimized. It is used for streaming ingestion from Kafka or Pulsar, change data capture from databases such as PostgreSQL and MySQL, and workloads needing ACID transactions.",
+  "code": "HU",
+  "tier": "Free",
+  "price": "Free (open source, Apache License 2.0)",
+  "priceUrl": "https://hudi.apache.org"
+ },
+ {
+  "n": 123,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Trino",
+  "url": "https://trino.io",
+  "sum": "Trino is an open-source, distributed SQL query engine for big data. It runs fast interactive queries and can combine object storage, relational databases and NoSQL systems in one SQL query without copying data. It is used for interactive analytics, querying cloud object storage, federated queries across sources and batch ETL.",
+  "code": "TR",
+  "tier": "Free",
+  "price": "Free (open source, Apache License 2.0)",
+  "priceUrl": "https://trino.io"
+ },
+ {
+  "n": 124,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Starburst",
+  "url": "https://www.starburst.io",
+  "sum": "Starburst is a data platform that queries 50+ sources, including warehouses, lakes, databases and SaaS applications, in a single SQL statement without copying data. It provides governed, real-time access to distributed data and reduces the need for ETL pipelines and centralization. It suits enterprises with data residency requirements, regulated industries and teams across multiple clouds or hybrid environments that want to avoid lock-in.",
+  "code": "ST",
+  "tier": "Free + Paid",
+  "price": "Free: $0. Pro: from $0.50/credit. Enterprise: from $0.75/credit. Mission-Critical: from $1.00/credit",
+  "priceUrl": "https://www.starburst.io/pricing/"
+ },
+ {
+  "n": 125,
+  "cat": "Storage / Warehouse / Query",
+  "name": "Dremio",
+  "url": "https://www.dremio.com",
+  "sum": "Dremio is a data lakehouse platform that combines a query engine, semantic layer and catalog to connect analytics tools and AI agents to enterprise data. It speeds up queries and reduces manual data preparation. It is used for agentic analytics, data fabric implementations, warehouse-to-lakehouse migrations and supply chain analytics.",
+  "code": "DR",
+  "tier": "Free + Paid",
+  "price": "Community Edition: Free. Dremio Cloud: $0.20 per DCU. Dremio Enterprise: Price not specified",
+  "priceUrl": "https://www.dremio.com/pricing/"
+ },
+ {
+  "n": 126,
+  "cat": "Storage / Warehouse / Query",
+  "name": "DuckDB",
+  "url": "https://duckdb.org",
+  "sum": "DuckDB is an open-source analytical SQL database that runs SQL across many data formats and storage systems. It is portable, from edge devices to large servers, and integrates with common programming languages and formats such as CSV, JSON and Parquet. It is used for data analysis and wrangling, lakehouse workloads and querying remote data directly without complex ETL.",
+  "code": "DU",
+  "tier": "Free",
+  "price": "Free (open source, MIT license)",
+  "priceUrl": "https://duckdb.org"
+ },
+ {
+  "n": 127,
+  "cat": "Storage / Warehouse / Query",
+  "name": "MotherDuck",
+  "url": "https://motherduck.com",
+  "sum": "MotherDuck provides serverless SQL analytics powered by DuckDB, giving each user and agent an isolated compute instance (a Duckling). Isolation prevents one heavy query from slowing other users. It is used for customer-facing analytics in production applications, internal data warehousing and AI agent data exploration.",
+  "code": "MO",
+  "tier": "Free + Paid",
+  "price": "Lite: from $0. Business: $250 per org/month + usage. Enterprise: Custom",
+  "priceUrl": "https://motherduck.com/product/pricing/"
+ }
+];
+
+export const STORE_MESH = ["Snowflake", "Databricks", "Google_BigQuery", "Amazon_Redshift", "Azure_Synapse_Analytics", "Microsoft_Fabric", "ClickHouse", "Firebolt", "Teradata", "Apache_Iceberg", "Delta_Lake", "Apache_Hudi", "Trino", "Starburst", "Dremio", "DuckDB", "MotherDuck"];
+
+export const STORE_FILES = ["storage_warehouse_query_glass.glb"];
+
+export const DQ_TOOLS = [
+ {
+  "n": 128,
+  "cat": "Data Quality / Observability",
+  "name": "Great Expectations",
+  "url": "https://greatexpectations.io",
+  "sum": "Great Expectations (GX Core) is an open-source framework for testing, validating and documenting data quality across data pipelines; GX Cloud adds a managed option. It gives technical and business stakeholders a shared toolset and integrates with orchestrators for automated action on results. It is used by teams that collaborate across departments, report data quality to business users and continuously monitor data systems.",
+  "code": "GE",
+  "tier": "Free + Paid",
+  "price": "GX Core (open source) and GX Cloud Developer: Free. Team / Enterprise: Price not specified",
+  "priceUrl": "https://greatexpectations.io/pricing/"
+ },
+ {
+  "n": 129,
+  "cat": "Data Quality / Observability",
+  "name": "Soda",
+  "url": "https://www.soda.io",
+  "sum": "Soda is a data quality platform that detects, explains and fixes data quality issues at table and record level. Engineers work in code while business users work in an interface, connected by AI-assisted data contracts that generate quality checks. It is used for pipeline testing, data mesh, cloud migration reconciliation, data governance and regulatory compliance such as BCBS 239.",
+  "code": "SO",
+  "tier": "Free + Paid",
+  "price": "Free: $0/month. Team: $750/month. Enterprise: Custom",
+  "priceUrl": "https://www.soda.io/pricing"
+ },
+ {
+  "n": 130,
+  "cat": "Data Quality / Observability",
+  "name": "Monte Carlo",
+  "url": "https://montecarlo.ai",
+  "sum": "Monte Carlo is a data and AI observability platform for monitoring, troubleshooting and optimizing data and AI agents across enterprise systems. It detects issues before stakeholders notice them, helping teams run trusted AI in production. It is used for data quality monitoring, agent observability, analytics and ML model reliability and data migrations.",
+  "code": "MC",
+  "tier": "Paid",
+  "price": "Price not specified (pricing on request)",
+  "priceUrl": "https://montecarlo.ai/request-for-pricing/"
+ },
+ {
+  "n": 131,
+  "cat": "Data Quality / Observability",
+  "name": "Bigeye",
+  "url": "https://www.bigeye.com",
+  "sum": "Bigeye provides data observability, end-to-end lineage and data governance across enterprise data stacks. It helps teams find data quality issues sooner and automatically discovers sensitive data such as PII and PHI. It serves data engineers, analysts and governance teams monitoring pipeline reliability, meeting regulatory requirements and supporting responsible AI.",
+  "code": "BI",
+  "tier": "Paid",
+  "price": "Price not specified",
+  "priceUrl": "https://www.bigeye.com"
+ },
+ {
+  "n": 132,
+  "cat": "Data Quality / Observability",
+  "name": "Anomalo",
+  "url": "https://www.anomalo.com",
+  "sum": "Anomalo is an autonomous data quality system that uses AI agents to monitor data for quality issues, anomalies and changes without manual configuration. It investigates data problems automatically before they reach stakeholders, reducing manual monitoring and rule-writing. It is used in telecommunications, financial services, retail, healthcare, media and energy, where data integrity affects revenue, compliance and operations.",
+  "code": "AN",
+  "tier": "Paid",
+  "price": "Price not specified",
+  "priceUrl": "https://www.anomalo.com"
+ },
+ {
+  "n": 133,
+  "cat": "Data Quality / Observability",
+  "name": "Elementary",
+  "url": "https://www.elementary-data.com",
+  "sum": "Elementary is a platform that combines data observability, quality monitoring, governance and data discovery. It helps teams detect and resolve data issues before they affect dashboards, models and AI workflows, with interfaces for both engineers and business users. It is used by teams running large-scale pipelines, building reliable AI products and maintaining governance across complex data stacks.",
+  "code": "EL",
+  "tier": "Free + Paid",
+  "price": "Open-source community version: Free. Scale / Enterprise / Unlimited: Price not specified",
+  "priceUrl": "https://www.elementary-data.com/pricing"
+ },
+ {
+  "n": 134,
+  "cat": "Data Quality / Observability",
+  "name": "Acceldata",
+  "url": "https://www.acceldata.io",
+  "sum": "Acceldata is a platform that runs data workloads and AI agents where the data lives, with observability, governance and runtime control across hybrid clouds. An automated loop detects anomalies, diagnoses root causes, applies fixes and verifies results, cutting manual effort. It is used for data quality validation, pipeline reliability in hybrid environments, AI agent governance and Hadoop modernization.",
+  "code": "AC",
+  "tier": "Paid",
+  "price": "PRO / ENTERPRISE: Price not specified (free trial for Cost Optimization PRO)",
+  "priceUrl": "https://www.acceldata.io/pricing"
+ },
+ {
+  "n": 135,
+  "cat": "Data Quality / Observability",
+  "name": "Metaplane",
+  "url": "https://www.metaplane.dev",
+  "sum": "Metaplane is an end-to-end data observability platform that catches silent data quality issues. It monitors data without code, tracks lineage and adds data CI/CD checks to pull requests, so teams know when something breaks, why and how to fix it. It is used by data teams that need to prevent quality issues from reaching the business.",
+  "code": "ME",
+  "tier": "Free + Paid",
+  "price": "Free: $0/month. Pro: usage-based (per monitored table). Enterprise: Custom",
+  "priceUrl": "https://www.metaplane.dev/pricing"
+ }
+];
+
+export const DQ_MESH = ["Great_Expectations", "Soda", "Monte_Carlo", "Bigeye", "Anomalo", "Elementary", "Acceldata", "Metaplane"];
+
+export const DQ_FILES = ["data_quality_observability_glass.glb"];
+
+export const CATALOG_TOOLS = [
+ {
+  "n": 136,
+  "cat": "Catalog / Governance",
+  "name": "Alation",
+  "url": "https://www.alation.com",
+  "sum": "Alation provides the Alation Intelligence Operating System for managing data governance, AI assets and data quality across multiple platforms. When an AI application gives a wrong answer, it helps show whether the data, the context or the agent caused it so the right thing gets fixed. It is used for agentic automation, AI compliance documentation, consistent metrics across analytics platforms and data pipeline monitoring.",
+  "code": "AL",
+  "tier": "Paid",
+  "price": "Price not specified",
+  "priceUrl": "https://www.alation.com/pricing/"
+ },
+ {
+  "n": 137,
+  "cat": "Catalog / Governance",
+  "name": "Collibra",
+  "url": "https://www.collibra.com",
+  "sum": "Collibra is an enterprise platform for data governance, AI agent oversight and delivery of governed business context to data platforms and models. Ontology-governed context helps agents retrieve the correct meaning of data and gives visibility into what is working and what is exposed. It is used for regulatory compliance (BCBS 239, Solvency II), AI agent lifecycle governance, certified data products and privacy and access control.",
+  "code": "CO",
+  "tier": "Paid",
+  "price": "Price not specified",
+  "priceUrl": "https://www.collibra.com"
+ },
+ {
+  "n": 138,
+  "cat": "Catalog / Governance",
+  "name": "Atlan",
+  "url": "https://atlan.com",
+  "sum": "Atlan unifies metadata from 80+ sources, including warehouses, BI tools and business applications, into an enterprise data graph available to AI agents through APIs, SQL and an MCP server. AI generates descriptions and business definitions that human experts certify, so agents work from verified knowledge. It is used to give AI agents business definitions, enforce data access policies, trace AI outputs to source data and speed up new agent deployments.",
+  "code": "AT",
+  "tier": "Paid",
+  "price": "Price not specified",
+  "priceUrl": "https://atlan.com/pricing/"
+ },
+ {
+  "n": 139,
+  "cat": "Catalog / Governance",
+  "name": "DataHub",
+  "url": "https://datahub.com",
+  "sum": "DataHub provides discovery, governance and observability by consolidating metadata from across the data infrastructure; DataHub Core is open source and DataHub Cloud is the managed enterprise version. Central metadata reduces time spent finding data and keeps governance consistent across teams. It is used by enterprises with large data estates, organizations giving AI agents reliable data context and companies with decentralized data architectures.",
+  "code": "DA",
+  "tier": "Free + Paid",
+  "price": "DataHub Core (open source): Free. DataHub Cloud: Price not specified",
+  "priceUrl": "https://datahub.com"
+ },
+ {
+  "n": 140,
+  "cat": "Catalog / Governance",
+  "name": "OpenMetadata",
+  "url": "https://open-metadata.org",
+  "sum": "OpenMetadata is an open-source platform for data cataloging, discovery, quality, observability, governance, lineage and collaboration, built on a knowledge graph of metadata and business semantics. It gives people and AI agents the same trusted data context and scales to millions of data assets. It is used for automating data governance, AI-assisted data discovery and shared data understanding across siloed teams.",
+  "code": "OP",
+  "tier": "Free + Paid",
+  "price": "Open source: Free. Collate (managed): Price not specified",
+  "priceUrl": "https://open-metadata.org"
+ },
+ {
+  "n": 141,
+  "cat": "Catalog / Governance",
+  "name": "Amundsen",
+  "url": "https://github.com/amundsen-io/amundsen",
+  "sum": "Amundsen is an open-source, metadata-driven data discovery application that works as a search engine for an organization's data assets. It indexes tables, dashboards and other resources and ranks results by usage, so analysts, data scientists and engineers find relevant data faster. It is used for data discovery and governance across databases, warehouses and analytics platforms at companies such as Lyft, Square, ING and Instacart.",
+  "code": "AM",
+  "tier": "Free",
+  "price": "Free (open source, Apache 2.0)",
+  "priceUrl": "https://github.com/amundsen-io/amundsen"
+ },
+ {
+  "n": 142,
+  "cat": "Catalog / Governance",
+  "name": "Unity Catalog",
+  "url": "https://www.unitycatalog.io",
+  "sum": "Unity Catalog is an open-source universal catalog for data and AI that supports lakehouse formats such as Delta Lake and Apache Iceberg across multiple clouds. It provides unified governance and security for tabular data, unstructured data and AI assets while keeping systems interoperable. It is used by enterprises governing data across several compute engines and clouds and by teams building generative AI applications that need standardized metadata and access control.",
+  "code": "UC",
+  "tier": "Free",
+  "price": "Free (open source, Apache 2.0)",
+  "priceUrl": "https://www.unitycatalog.io"
+ },
+ {
+  "n": 143,
+  "cat": "Catalog / Governance",
+  "name": "Microsoft Purview",
+  "url": "https://www.microsoft.com/en-us/security/business/microsoft-purview",
+  "sum": "Microsoft Purview is a platform that combines data security, data governance and compliance solutions for an organization's entire data estate. It gives visibility into data, protects sensitive data through its lifecycle and helps manage data risks and regulatory requirements in one place. It is used by organizations adopting AI (including Copilot and enterprise AI apps), preventing data leakage in generative AI and managing compliance.",
+  "code": "PU",
+  "tier": "Paid",
+  "price": "Price not specified (rates shown via Azure calculator only)",
+  "priceUrl": "https://azure.microsoft.com/en-us/pricing/details/purview/"
+ },
+ {
+  "n": 144,
+  "cat": "Catalog / Governance",
+  "name": "Apache Atlas",
+  "url": "https://atlas.apache.org",
+  "sum": "Apache Atlas is an open-source set of scalable, extensible governance services for building data catalogs and classifying data assets. It helps enterprises meet compliance requirements in Hadoop and integrates with the wider enterprise data ecosystem. It is used for collaboration on data assets, classification-based security (for example PII or sensitive data) and tracking data lineage across processing systems.",
+  "code": "AT",
+  "tier": "Free",
+  "price": "Free (open source, Apache project)",
+  "priceUrl": "https://atlas.apache.org"
+ }
+];
+
+export const CATALOG_MESH = ["Alation", "Collibra", "Atlan", "DataHub", "OpenMetadata", "Amundsen", "Unity_Catalog", "Microsoft_Purview", "Apache_Atlas"];
+
+export const CATALOG_FILES = ["catalog_governance_glass.glb"];
+
+// The five newer segments (researched data, v7): connector scope plus the named databases, warehouses and lakes,
+// grouped the same way as the first three segments.
+Object.assign(TOOL_CONN, {"dbt": {"scope": "Major warehouses + databases as adapters (Snowflake, BigQuery, Redshift, Databricks, etc.)", "dir": "Adapter", "note": "Official or community adapter", "db": ["ClickHouse", "DuckDB", "MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Apache Spark", "Athena", "Azure Synapse", "Databricks", "Dremio", "Google BigQuery", "Microsoft Fabric", "MotherDuck", "Snowflake", "Starburst", "Trino"], "other": [], "tips": {}, "noList": false}, "SQLMesh": {"scope": null, "dir": "Adapter / Engine", "note": null, "db": ["ClickHouse", "DuckDB", "PostgreSQL"], "wh": ["Amazon Redshift", "Databricks", "Google BigQuery", "MotherDuck", "Snowflake"], "other": [], "tips": {}, "noList": false, "scopeMissing": true}, "Coalesce": {"scope": null, "dir": "Native", "note": "Cloud ELT transformation platform", "db": ["PostgreSQL"], "wh": ["Amazon Redshift", "Databricks", "Google BigQuery", "Snowflake"], "other": [], "tips": {}, "noList": false, "scopeMissing": true}, "Dataform": {"scope": null, "dir": "Native", "note": "Google Cloud native (primarily BigQuery)", "db": ["PostgreSQL"], "wh": ["Amazon Redshift", "Google BigQuery", "Snowflake"], "other": [], "tips": {}, "noList": false, "scopeMissing": true}, "Apache Spark": {"scope": null, "dir": "Source/Sink", "note": "Spark connectors / JDBC", "db": ["Cassandra", "MongoDB", "MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon S3", "Apache Hudi", "Apache Iceberg", "Delta Lake", "HDFS", "Hive"], "other": ["JDBC sources", "Kafka"], "tips": {}, "noList": false, "scopeMissing": true}, "Apache Kafka": {"scope": "Hundreds of Kafka Connect connectors (community + Confluent)", "dir": "Source/Sink (Connect)", "note": "Kafka Connect connectors", "db": ["Amazon DynamoDB", "Cassandra", "Elasticsearch", "MongoDB", "MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Amazon S3", "Azure Data Lake Storage", "Databricks", "Google BigQuery", "Google Cloud Storage", "Snowflake"], "other": ["JDBC"], "tips": {}, "noList": false}, "Confluent": {"scope": "120+ fully managed connectors + Kafka Connect ecosystem", "dir": "Source/Sink (Connect)", "note": "Kafka Connect connectors", "db": ["Amazon DynamoDB", "Cassandra", "Elasticsearch", "MongoDB", "MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Amazon S3", "Azure Data Lake Storage", "Databricks", "Google BigQuery", "Google Cloud Storage", "Snowflake"], "other": ["JDBC"], "tips": {}, "noList": false}, "Apache Flink": {"scope": "Streaming platform – connectors via ecosystem (Kafka Connect, etc.)", "dir": "Source/Sink", "note": "Connectors / IO", "db": ["Amazon DynamoDB", "Cassandra", "ClickHouse", "MongoDB", "MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Amazon S3", "Apache Iceberg", "Azure Data Lake Storage", "Databricks", "Delta Lake", "Google BigQuery", "Google Cloud Storage", "Snowflake"], "other": ["Event Hubs", "Kafka", "Kinesis", "Pub/Sub"], "tips": {}, "noList": false}, "Apache Pulsar": {"scope": "Streaming platform – connectors via ecosystem (Kafka Connect, etc.)", "dir": "Source/Sink", "note": "Pulsar IO connectors", "db": ["Cassandra", "ClickHouse", "Elasticsearch", "MongoDB", "MySQL", "PostgreSQL"], "wh": ["Amazon S3", "Azure Blob", "Google BigQuery", "Google Cloud Storage", "Snowflake"], "other": [], "tips": {}, "noList": false}, "Amazon Kinesis": {"scope": "Streaming platform – connectors via ecosystem (Kafka Connect, etc.)", "dir": "Source/Sink", "note": "AWS native integrations", "db": ["Amazon DynamoDB", "Amazon OpenSearch", "Amazon RDS"], "wh": ["Amazon Redshift", "Amazon S3", "Databricks", "Snowflake"], "other": ["Apache Flink", "Kafka (MSK)"], "tips": {}, "noList": false}, "Google Cloud Pub/Sub": {"scope": "Streaming platform – connectors via ecosystem (Kafka Connect, etc.)", "dir": "Source/Sink", "note": "GCP native", "db": ["Cloud Bigtable", "Cloud Spanner", "Cloud SQL", "Firestore"], "wh": ["BigQuery", "Cloud Storage", "Dataproc"], "other": ["Dataflow"], "tips": {}, "noList": false}, "Azure Event Hubs": {"scope": "Streaming platform – connectors via ecosystem (Kafka Connect, etc.)", "dir": "Source/Sink", "note": "Azure native", "db": ["Azure Cosmos DB", "Azure SQL"], "wh": ["Azure Blob Storage", "Azure Data Lake Storage", "Azure Synapse", "Databricks", "Microsoft Fabric"], "other": ["Kafka"], "tips": {}, "noList": false}, "Redpanda": {"scope": "Streaming platform – connectors via ecosystem (Kafka Connect, etc.)", "dir": "Source/Sink", "note": "Kafka-compatible connectors", "db": ["ClickHouse", "MySQL", "PostgreSQL"], "wh": ["Amazon S3", "Google BigQuery", "Snowflake"], "other": ["Kafka"], "tips": {}, "noList": false}, "Apache Beam": {"scope": "Streaming platform – connectors via ecosystem (Kafka Connect, etc.)", "dir": "Source/Sink", "note": "Connectors / IO", "db": ["Amazon DynamoDB", "Cassandra", "ClickHouse", "MongoDB", "MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Amazon S3", "Apache Iceberg", "Azure Data Lake Storage", "Databricks", "Delta Lake", "Google BigQuery", "Google Cloud Storage", "Snowflake"], "other": ["Event Hubs", "Kafka", "Kinesis", "Pub/Sub"], "tips": {}, "noList": false}, "Materialize": {"scope": "Streaming platform – connectors via ecosystem (Kafka Connect, etc.)", "dir": "Source/Sink", "note": "Streaming SQL database", "db": ["MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon S3", "Google BigQuery", "Google Cloud Storage", "Snowflake"], "other": ["Kafka", "Redpanda"], "tips": {}, "noList": false}, "RisingWave": {"scope": "Streaming platform – connectors via ecosystem (Kafka Connect, etc.)", "dir": "Source/Sink", "note": "Streaming database", "db": ["ClickHouse", "MySQL", "PostgreSQL"], "wh": ["Amazon S3", "Apache Iceberg", "Google BigQuery", "Google Cloud Storage", "Snowflake"], "other": ["Kafka"], "tips": {}, "noList": false}, "Snowflake": {"scope": "Native connectors + partner ecosystem (Fivetran, Airbyte, etc.)", "dir": "Native / External", "note": "Snowpipe, external tables, Iceberg tables", "db": ["MySQL (external)", "PostgreSQL (external)", "SQL Server (external)"], "wh": ["Amazon S3", "Apache Hudi", "Apache Iceberg", "Azure Data Lake Storage", "Delta Lake", "Google Cloud Storage"], "other": ["Kafka"], "tips": {}, "noList": false}, "Databricks": {"scope": "Native + Unity Catalog + partner connectors", "dir": "Native / Lakehouse", "note": "Unity Catalog, Delta, federated queries", "db": ["Cassandra", "MongoDB", "MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Amazon S3", "Apache Hudi", "Apache Iceberg", "Azure Data Lake Storage", "BigQuery", "Delta Lake", "Google Cloud Storage", "Snowflake"], "other": ["Kafka"], "tips": {}, "noList": false}, "Google BigQuery": {"scope": "Native Google + partner + federated queries", "dir": "Native / Federated", "note": "BigLake, external tables, federated queries", "db": ["Bigtable", "Cloud Spanner", "Cloud SQL"], "wh": ["Amazon S3", "Apache Iceberg", "Azure Blob", "Delta Lake", "Google Cloud Storage"], "other": ["Kafka", "Pub/Sub"], "tips": {}, "noList": false}, "Amazon Redshift": {"scope": "Native AWS + federated + partner", "dir": "Native / Spectrum", "note": "Redshift Spectrum, federated queries", "db": ["Amazon Aurora", "Amazon DynamoDB", "Amazon RDS", "MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon S3", "Apache Iceberg", "Delta Lake"], "other": [], "tips": {}, "noList": false}, "Azure Synapse Analytics": {"scope": "Warehouse/lake – receives data from ETL tools; native + partner connectors", "dir": "Native / Linked", "note": "Serverless SQL, Spark pools, linked services", "db": ["Azure SQL", "MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon S3", "Apache Iceberg", "Azure Blob", "Azure Data Lake Storage", "Delta Lake", "OneLake"], "other": [], "tips": {}, "noList": false}, "Microsoft Fabric": {"scope": "Native Microsoft + OneLake + partner", "dir": "Native / OneLake", "note": "OneLake shortcuts, mirroring", "db": ["Azure SQL", "PostgreSQL"], "wh": ["Amazon S3", "Apache Iceberg", "Azure Blob", "Azure Data Lake Storage", "Databricks", "Delta Lake", "Google Cloud Storage", "OneLake", "Snowflake"], "other": [], "tips": {}, "noList": false}, "ClickHouse": {"scope": "Native + Kafka + many input formats", "dir": "Source/Table Engine", "note": "Table engines & integrations", "db": ["MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon S3", "Apache Iceberg", "Azure Blob", "Google Cloud Storage"], "other": ["Kafka"], "tips": {}, "noList": false}, "Firebolt": {"scope": "Warehouse/lake – receives data from ETL tools; native + partner connectors", "dir": "Source", "note": "Cloud data warehouse", "db": ["MySQL", "PostgreSQL"], "wh": ["Amazon S3", "Azure Blob", "Google Cloud Storage"], "other": [], "tips": {}, "noList": false}, "Teradata": {"scope": "Warehouse/lake – receives data from ETL tools; native + partner connectors", "dir": "Source/Target", "note": "QueryGrid, connectors", "db": ["DB2", "MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon S3", "HDFS"], "other": ["Kafka"], "tips": {}, "noList": false}, "Apache Iceberg": {"scope": "Warehouse/lake – receives data from ETL tools; native + partner connectors", "dir": "Table format", "note": "Open table format – engines that read/write Iceberg", "db": [], "wh": ["Amazon S3", "Azure Data Lake Storage", "BigQuery", "Databricks", "Google Cloud Storage", "HDFS", "Redshift", "Snowflake", "Spark", "Trino"], "other": [], "tips": {}, "noList": false}, "Delta Lake": {"scope": "Warehouse/lake – receives data from ETL tools; native + partner connectors", "dir": "Table format", "note": "Open table format (Linux Foundation)", "db": [], "wh": ["Amazon S3", "Azure Data Lake Storage", "Databricks", "Google Cloud Storage", "HDFS", "Presto", "Spark", "Trino"], "other": ["Flink"], "tips": {}, "noList": false}, "Apache Hudi": {"scope": "Warehouse/lake – receives data from ETL tools; native + partner connectors", "dir": "Table format", "note": "Open table format", "db": [], "wh": ["Amazon S3", "Azure Data Lake Storage", "Google Cloud Storage", "HDFS", "Hive", "Presto", "Spark", "Trino"], "other": ["Flink"], "tips": {}, "noList": false}, "Trino": {"scope": "Warehouse/lake – receives data from ETL tools; native + partner connectors", "dir": "Catalog / Connector", "note": "Trino connectors", "db": ["Cassandra", "Elasticsearch", "MongoDB", "MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon S3", "Azure Data Lake", "BigQuery", "Delta Lake", "Google Cloud Storage", "Hive", "Hudi", "Iceberg", "Redshift", "Snowflake"], "other": ["Kafka"], "tips": {}, "noList": false}, "Starburst": {"scope": "Warehouse/lake – receives data from ETL tools; native + partner connectors", "dir": "Catalog / Connector", "note": "Trino-based enterprise", "db": ["MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon S3", "BigQuery", "Delta Lake", "Google Cloud Storage", "Hive", "Iceberg", "Snowflake"], "other": ["Kafka"], "tips": {}, "noList": false}, "Dremio": {"scope": "Warehouse/lake – receives data from ETL tools; native + partner connectors", "dir": "Source", "note": "Data lake engine", "db": ["Elasticsearch", "MongoDB", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon S3", "Azure Data Lake Storage", "Delta Lake", "Google Cloud Storage", "HDFS", "Hive", "Iceberg"], "other": [], "tips": {}, "noList": false}, "DuckDB": {"scope": "Direct file + many extensions (Postgres, MySQL, SQLite, S3, etc.)", "dir": "Extension / Scan", "note": "In-process analytical database", "db": ["MySQL", "PostgreSQL", "SQLite"], "wh": ["Amazon S3", "Google Cloud Storage", "Iceberg", "MotherDuck (cloud)"], "other": ["CSV / Parquet files"], "tips": {}, "noList": false}, "MotherDuck": {"scope": "Warehouse/lake – receives data from ETL tools; native + partner connectors", "dir": "Native", "note": "Serverless DuckDB cloud", "db": ["DuckDB", "PostgreSQL"], "wh": ["Amazon S3", "Azure Blob", "Google Cloud Storage", "Iceberg"], "other": ["Parquet"], "tips": {}, "noList": false}, "Great Expectations": {"scope": "Monitors existing warehouses/databases (not a data-movement connector tool)", "dir": "Connects to", "note": "Data quality checks on warehouse tables", "db": ["ClickHouse", "DuckDB", "MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon Athena", "Amazon Redshift", "Azure Synapse", "Databricks", "Google BigQuery", "Microsoft Fabric", "MotherDuck", "Snowflake", "Trino"], "other": [], "tips": {}, "noList": false}, "Soda": {"scope": "Monitors existing warehouses/databases (not a data-movement connector tool)", "dir": "Connects to", "note": "Data quality checks on warehouse tables", "db": ["ClickHouse", "DuckDB", "MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon Athena", "Amazon Redshift", "Azure Synapse", "Databricks", "Google BigQuery", "Microsoft Fabric", "MotherDuck", "Snowflake", "Trino"], "other": [], "tips": {}, "noList": false}, "Monte Carlo": {"scope": "Monitors existing warehouses/databases (not a data-movement connector tool)", "dir": "Monitors", "note": "Observability / anomaly detection on warehouse", "db": ["MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon Athena", "Amazon Redshift", "Azure Synapse", "Databricks", "Google BigQuery", "Microsoft Fabric", "Snowflake", "Trino"], "other": [], "tips": {}, "noList": false}, "Bigeye": {"scope": "Monitors existing warehouses/databases (not a data-movement connector tool)", "dir": "Monitors", "note": "Observability / anomaly detection on warehouse", "db": ["MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon Athena", "Amazon Redshift", "Azure Synapse", "Databricks", "Google BigQuery", "Microsoft Fabric", "Snowflake", "Trino"], "other": [], "tips": {}, "noList": false}, "Anomalo": {"scope": "Monitors existing warehouses/databases (not a data-movement connector tool)", "dir": "Monitors", "note": "Observability / anomaly detection on warehouse", "db": ["MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon Athena", "Amazon Redshift", "Azure Synapse", "Databricks", "Google BigQuery", "Microsoft Fabric", "Snowflake", "Trino"], "other": [], "tips": {}, "noList": false}, "Elementary": {"scope": "Monitors existing warehouses/databases (not a data-movement connector tool)", "dir": "Connects to", "note": "Data quality checks on warehouse tables", "db": ["ClickHouse", "DuckDB", "MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon Athena", "Amazon Redshift", "Azure Synapse", "Databricks", "Google BigQuery", "Microsoft Fabric", "MotherDuck", "Snowflake", "Trino"], "other": [], "tips": {}, "noList": false}, "Acceldata": {"scope": "Monitors existing warehouses/databases (not a data-movement connector tool)", "dir": "Monitors", "note": "Observability / anomaly detection on warehouse", "db": ["MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon Athena", "Amazon Redshift", "Azure Synapse", "Databricks", "Google BigQuery", "Microsoft Fabric", "Snowflake", "Trino"], "other": [], "tips": {}, "noList": false}, "Metaplane": {"scope": "Monitors existing warehouses/databases (not a data-movement connector tool)", "dir": "Monitors", "note": "Observability / anomaly detection on warehouse", "db": ["MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon Athena", "Amazon Redshift", "Azure Synapse", "Databricks", "Google BigQuery", "Microsoft Fabric", "Snowflake", "Trino"], "other": [], "tips": {}, "noList": false}, "Alation": {"scope": "Catalogs/governs data across warehouses, lakes, databases", "dir": "Ingests metadata from", "note": "Metadata / lineage / catalog", "db": ["MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Amazon S3", "Apache Iceberg", "Azure Data Lake Storage", "Databricks", "Delta Lake", "Google BigQuery", "Google Cloud Storage", "Hive", "Snowflake"], "other": ["dbt", "Kafka", "Looker", "Power BI", "Tableau"], "tips": {}, "noList": false}, "Collibra": {"scope": "Catalogs/governs data across warehouses, lakes, databases", "dir": "Ingests metadata from", "note": "Metadata / lineage / catalog", "db": ["MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Amazon S3", "Apache Iceberg", "Azure Data Lake Storage", "Databricks", "Delta Lake", "Google BigQuery", "Google Cloud Storage", "Hive", "Snowflake"], "other": ["dbt", "Kafka", "Looker", "Power BI", "Tableau"], "tips": {}, "noList": false}, "Atlan": {"scope": "Catalogs/governs data across warehouses, lakes, databases", "dir": "Ingests metadata from", "note": "Metadata / lineage / catalog", "db": ["MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Amazon S3", "Apache Iceberg", "Azure Data Lake Storage", "Databricks", "Delta Lake", "Google BigQuery", "Google Cloud Storage", "Hive", "Snowflake"], "other": ["dbt", "Kafka", "Looker", "Power BI", "Tableau"], "tips": {}, "noList": false}, "DataHub": {"scope": "Catalogs/governs data across warehouses, lakes, databases", "dir": "Ingests metadata from", "note": "Metadata / lineage / catalog", "db": ["MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Amazon S3", "Apache Iceberg", "Azure Data Lake Storage", "Databricks", "Delta Lake", "Google BigQuery", "Google Cloud Storage", "Hive", "Snowflake"], "other": ["dbt", "Kafka", "Looker", "Power BI", "Tableau"], "tips": {}, "noList": false}, "OpenMetadata": {"scope": "Catalogs/governs data across warehouses, lakes, databases", "dir": "Ingests metadata from", "note": "Metadata / lineage / catalog", "db": ["MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Amazon S3", "Apache Iceberg", "Azure Data Lake Storage", "Databricks", "Delta Lake", "Google BigQuery", "Google Cloud Storage", "Hive", "Snowflake"], "other": ["dbt", "Kafka", "Looker", "Power BI", "Tableau"], "tips": {}, "noList": false}, "Amundsen": {"scope": "Catalogs/governs data across warehouses, lakes, databases", "dir": "Ingests metadata from", "note": "Metadata / lineage / catalog", "db": ["MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon Redshift", "Amazon S3", "Apache Iceberg", "Azure Data Lake Storage", "Databricks", "Delta Lake", "Google BigQuery", "Google Cloud Storage", "Hive", "Snowflake"], "other": ["dbt", "Kafka", "Looker", "Power BI", "Tableau"], "tips": {}, "noList": false}, "Unity Catalog": {"scope": "Catalogs/governs data across warehouses, lakes, databases", "dir": "Governs", "note": "Databricks Unity Catalog", "db": ["MySQL", "PostgreSQL", "SQL Server"], "wh": ["Amazon S3", "Apache Hudi", "Apache Iceberg", "Azure Data Lake Storage", "BigQuery", "Delta Lake", "Google Cloud Storage", "Hive", "Redshift", "Snowflake"], "other": ["Kafka"], "tips": {}, "noList": false}, "Microsoft Purview": {"scope": "Catalogs/governs data across warehouses, lakes, databases", "dir": "Scans / Governs", "note": "Microsoft data governance", "db": ["Azure SQL", "MySQL", "Oracle", "PostgreSQL", "SQL Server"], "wh": ["Amazon S3", "Azure Data Lake Storage", "Azure Synapse", "Databricks", "Snowflake"], "other": ["Power BI", "SAP"], "tips": {}, "noList": false}, "Apache Atlas": {"scope": "Catalogs/governs data across warehouses, lakes, databases", "dir": "Metadata from", "note": "Open-source metadata / governance", "db": ["HBase", "MySQL", "Oracle", "PostgreSQL"], "wh": ["Amazon S3", "Azure Data Lake", "HDFS", "Hive", "Spark"], "other": ["Kafka"], "tips": {}, "noList": false}});
+
+// Monthly Python package downloads for Transformation, Storage, Data Quality and Catalog (tools with public packages only).
+Object.assign(MONTHLY, {"transform": {"sheet": "Monthly - Transformation", "title": "Transformation - monthly PyPI downloads", "method": "Only tools with public Python package stats have numbers. Commercial tools (Coalesce, Dataform Cloud) have no public monthly series.", "source": "Source: pypistats.org API (overall downloads aggregated by month). Tools with no public Python package have no numbers here.", "unit": "PyPI downloads per month", "popLabel": "6-month total downloads", "popUnit": "downloads", "growthLabel": "Change Apr to Sep", "months": ["Apr", "May", "Jun", "Jul", "Aug", "Sep"], "tools": [{"name": "dbt", "m": [76524764, 113836342, 103223047, 113765029, 80452110, 22879038], "pop": 510680330, "growth": -0.701}, {"name": "SQLMesh", "m": [352086, 481087, 536193, 601845, 559675, 453211], "pop": 2984097, "growth": 0.2872}], "missing": []}, "store": {"sheet": "Monthly - Storage", "title": "Storage / Warehouse / Query - monthly PyPI downloads (verified public packages only)", "method": "Tools without a verified public monthly series have no numbers here. ClickHouse = clickhouse-connect; Iceberg = pyiceberg; Delta Lake = delta-spark.", "source": "Source: pypistats.org API. Package used: duckdb, clickhouse-connect, trino, pyiceberg, delta-spark, hudi. Commercial cloud warehouses have no public monthly install series.", "unit": "PyPI downloads per month", "popLabel": "6-month total downloads", "popUnit": "downloads", "growthLabel": "Change Apr to Sep", "months": ["Apr", "May", "Jun", "Jul", "Aug", "Sep"], "tools": [{"name": "DuckDB", "m": [31525649, 42837920, 49641121, 57017754, 65002515, 54373538], "pop": 300398497, "growth": 0.7247}, {"name": "Apache Iceberg", "m": [26965603, 46063104, 37345800, 39027954, 35795250, 19808703], "pop": 205006414, "growth": -0.2654}, {"name": "Delta Lake", "m": [27813460, 36478986, 35974988, 38481773, 36694796, 27962240], "pop": 203406243, "growth": 0.0053}, {"name": "Apache Hudi", "m": [27350, 32523, 44169, 45005, 38807, 33390], "pop": 221244, "growth": 0.2208}, {"name": "ClickHouse", "m": [19329242, 24329025, 27996255, 31172474, 31297965, 27223496], "pop": 161348457, "growth": 0.4084}, {"name": "Trino", "m": [12462029, 18455277, 24165026, 23631444, 20593310, 15029893], "pop": 114336979, "growth": 0.2061}], "missing": []}, "dq": {"sheet": "Monthly - Data Quality", "title": "Data Quality / Observability - monthly PyPI downloads (verified public packages only)", "method": "Tools without a verified public monthly series have no numbers here. Metaplane acquired by Datadog; no standalone public monthly series found.", "source": "Source: pypistats.org API. Packages: great-expectations, soda-core, elementary-data, pycarlo (Monte Carlo), anomalo. Commercial tools without public packages have no numbers here.", "unit": "PyPI downloads per month", "popLabel": "6-month total downloads", "popUnit": "downloads", "growthLabel": "Change Apr to Sep", "months": ["Apr", "May", "Jun", "Jul", "Aug", "Sep"], "tools": [{"name": "Great Expectations", "m": [24907866, 29488501, 26996890, 27706574, 25518754, 19400340], "pop": 154018925, "growth": -0.2211}, {"name": "Soda", "m": [2780489, 3573374, 3222624, 3547823, 3269321, 1773182], "pop": 18166813, "growth": -0.3623}, {"name": "Elementary", "m": [929580, 1354540, 1371988, 1206576, 1152332, 927012], "pop": 6942028, "growth": -0.0028}, {"name": "Monte Carlo", "m": [1121969, 1292557, 1277405, 5830246, 7285939, 712756], "pop": 17520872, "growth": -0.3647}, {"name": "Anomalo", "m": [99201, 117744, 122343, 132925, 178770, 128429], "pop": 779412, "growth": 0.2946}], "missing": []}, "catalog": {"sheet": "Monthly - Catalog", "title": "Catalog / Governance - monthly adoption signals", "method": "Tools without a verified public monthly series have no numbers here. GitHub stars exist for OSS projects but are not monthly download counts.", "source": "Source: pypistats.org API for DataHub (acryl-datahub) and OpenMetadata (openmetadata-ingestion). Alation, Collibra, Unity Catalog, Atlan, Purview have no public monthly install series.", "unit": "PyPI downloads per month", "popLabel": "6-month total downloads", "popUnit": "downloads", "growthLabel": "Change Apr to Sep", "months": ["Apr", "May", "Jun", "Jul", "Aug", "Sep"], "tools": [{"name": "DataHub", "m": [3639961, 3847582, 4112507, 4229104, 4641873, 4954509], "pop": 25425536, "growth": 0.3611}, {"name": "OpenMetadata", "m": [261452, 370086, 339251, 508569, 360625, 176550], "pop": 2016533, "growth": -0.3247}], "missing": []}});
+
+// Status / Evidence / Rank for every tool in the monthly data, and each segment's ranked Widely used / Rising / Emerging lists.
+export const STATUS = {"etl": {"tools": {"Informatica (PowerCenter / IDMC)": {"status": "Widely used", "evidence": "Highest Google search interest in ETL set; long-standing enterprise leader", "rank": 1}, "Alteryx": {"status": "Widely used", "evidence": "Very high search interest; broad analytics + data prep installed base", "rank": 2}, "Boomi": {"status": "Widely used", "evidence": "High search interest; major iPaaS / integration platform", "rank": 3}, "AWS Glue": {"status": "Widely used", "evidence": "AWS native ETL; high search interest and AWS footprint", "rank": 4}, "SQL Server Integration Services (SSIS)": {"status": "Widely used", "evidence": "Microsoft stack staple; high search interest", "rank": 5}, "Fivetran": {"status": "Widely used", "evidence": "Leading modern ELT; category reference point in many comparisons", "rank": 6}, "Azure Data Factory": {"status": "Widely used", "evidence": "Azure native data integration; high search interest", "rank": 7}, "Apache NiFi": {"status": "Widely used", "evidence": "Major OSS data flow tool; strong search interest", "rank": 8}, "Talend": {"status": "Widely used", "evidence": "Established ETL/integration vendor; high search interest", "rank": 9}, "Debezium": {"status": "Rising", "evidence": "Leading OSS CDC; strong search interest relative to size", "rank": 2}, "Airbyte": {"status": "Rising", "evidence": "Open-source ELT; strong modern data stack adoption despite search decline in period", "rank": 1}, "Stitch": {"status": "Present", "evidence": "Cloud ELT (Talend); established but not growth leader", "rank": null}, "Supermetrics": {"status": "Present", "evidence": "Marketing data connectors; solid search interest", "rank": null}, "Pentaho Data Integration": {"status": "Present", "evidence": "OSS/enterprise ETL; moderate interest", "rank": null}, "SAP Data Services": {"status": "Widely used", "evidence": "SAP enterprise data integration", "rank": 14}, "IBM DataStage": {"status": "Widely used", "evidence": "Enterprise ETL; established IBM installed base", "rank": 12}, "Oracle GoldenGate": {"status": "Widely used", "evidence": "Enterprise CDC/replication leader in Oracle estates", "rank": 10}, "Google Cloud Data Fusion": {"status": "Present", "evidence": "GCP managed CDF", "rank": null}, "Matillion": {"status": "Present", "evidence": "Cloud ETL; moderate search interest", "rank": null}, "SnapLogic": {"status": "Present", "evidence": "iPaaS; moderate search interest", "rank": null}, "Apache Hop": {"status": "Emerging", "evidence": "OSS project (from Pentaho lineage); smaller footprint", "rank": 4}, "Qlik Replicate": {"status": "Present", "evidence": "Enterprise CDC/replication", "rank": null}, "Google Cloud Dataflow": {"status": "Widely used", "evidence": "GCP stream/batch (Beam); core GCP service", "rank": 11}, "Hevo Data": {"status": "Present", "evidence": "Cloud ELT vendor; moderate search interest", "rank": null}, "Striim": {"status": "Present", "evidence": "Streaming integration vendor", "rank": null}, "Adverity": {"status": "Present", "evidence": "Marketing data platform", "rank": null}, "Meltano": {"status": "Emerging", "evidence": "OSS dataops; smaller search volume", "rank": 3}, "Estuary Flow": {"status": "Emerging", "evidence": "Real-time/streaming ETL; smaller public footprint", "rank": 2}, "Funnel": {"status": "Present", "evidence": "Marketing data platform", "rank": null}, "Integrate.io": {"status": "Present", "evidence": "Cloud ETL", "rank": null}, "Oracle Data Integrator": {"status": "Widely used", "evidence": "Oracle enterprise ETL", "rank": 13}, "Skyvia": {"status": "Present", "evidence": "Cloud data integration", "rank": null}, "Keboola": {"status": "Present", "evidence": "Data platform", "rank": null}, "dlt (dltHub)": {"status": "Emerging", "evidence": "Newer Python ELT library; growing in modern stacks", "rank": 1}, "CloverDX": {"status": "Present", "evidence": "Data integration platform", "rank": null}, "Singer": {"status": "Emerging", "evidence": "OSS tap/target standard; limited search volume", "rank": 6}, "Portable": {"status": "Emerging", "evidence": "Low search volume; niche connectors", "rank": 5}}, "lists": {"widely": [{"name": "Informatica (PowerCenter / IDMC)", "why": "Highest Google search interest in ETL set"}, {"name": "Alteryx", "why": "Very high search interest; broad installed base"}, {"name": "Boomi", "why": "Major iPaaS; high search interest"}], "rising": [{"name": "Airbyte", "why": "Open-source ELT; strong modern data stack adoption"}, {"name": "Debezium", "why": "Leading OSS CDC"}, {"name": "Fivetran", "why": "Modern ELT category leader (also Widely used)"}], "emerging": [{"name": "dlt (dltHub)", "why": "Newer Python ELT library"}, {"name": "Estuary Flow", "why": "Real-time/streaming ETL"}, {"name": "Meltano", "why": "OSS dataops"}]}}, "orch": {"tools": {"Temporal": {"status": "Widely used", "evidence": "Highest PyPI downloads in orchestration set; durable execution leader", "rank": 1}, "Apache Airflow": {"status": "Widely used", "evidence": "De-facto batch orchestration standard; very high downloads", "rank": 2}, "Kubeflow Pipelines": {"status": "Widely used", "evidence": "Major ML pipeline orchestration on Kubernetes", "rank": 3}, "Prefect": {"status": "Rising", "evidence": "Modern Python orchestration; strong download growth historically", "rank": 1}, "Dagster": {"status": "Rising", "evidence": "Asset-centric orchestration; strong modern data stack adoption", "rank": 2}, "Kestra": {"status": "Rising", "evidence": "Fast download growth in period; declarative orchestration", "rank": 3}, "Luigi": {"status": "Present", "evidence": "Older Spotify-origin tool; still used, less growth", "rank": null}, "Windmill": {"status": "Emerging", "evidence": "Newer developer-centric automation", "rank": 3}, "Metaflow": {"status": "Present", "evidence": "Netflix-origin ML workflows", "rank": null}, "Flyte": {"status": "Rising", "evidence": "ML/data workflows; growing adoption", "rank": 5}, "ZenML": {"status": "Emerging", "evidence": "MLOps framework; earlier stage", "rank": 2}, "Mage": {"status": "Emerging", "evidence": "Newer notebook-style pipeline tool", "rank": 1}, "Apache DolphinScheduler": {"status": "Present", "evidence": "OSS workflow scheduler", "rank": null}}, "lists": {"widely": [{"name": "Temporal", "why": "Highest PyPI downloads; durable execution"}, {"name": "Apache Airflow", "why": "De-facto batch orchestration standard"}, {"name": "Kubeflow Pipelines", "why": "Major ML pipeline orchestration"}], "rising": [{"name": "Prefect", "why": "Modern Python orchestration"}, {"name": "Dagster", "why": "Asset-centric; modern data stack"}, {"name": "Kestra", "why": "Fast growth in downloads"}], "emerging": [{"name": "Mage", "why": "Notebook-style pipelines"}, {"name": "ZenML", "why": "MLOps framework"}, {"name": "Windmill", "why": "Developer-centric automation"}]}}, "bi": {"tools": {"Microsoft Power BI": {"status": "Widely used", "evidence": "Highest npm SDK downloads; Microsoft BI standard", "rank": 1}, "Apache Superset": {"status": "Rising", "evidence": "Leading OSS BI; strong npm download growth", "rank": 1}, "Amazon QuickSight": {"status": "Widely used", "evidence": "AWS native BI; high download volume", "rank": 2}, "ThoughtSpot": {"status": "Rising", "evidence": "Search-driven analytics; strong growth in SDK downloads", "rank": 2}, "Omni": {"status": "Rising", "evidence": "Modern BI; notable download presence", "rank": 4}, "Looker": {"status": "Widely used", "evidence": "Google Cloud BI; semantic modeling leader", "rank": 4}, "Metabase": {"status": "Rising", "evidence": "Popular OSS BI; strong downloads", "rank": 3}, "Tableau": {"status": "Widely used", "evidence": "Enterprise BI leader; large installed base", "rank": 3}, "Sigma Computing": {"status": "Rising", "evidence": "Spreadsheet-style cloud BI", "rank": 5}, "Lightdash": {"status": "Emerging", "evidence": "dbt-native OSS BI; fast download growth from small base", "rank": 1}, "GoodData": {"status": "Present", "evidence": "Headless BI; moderate downloads", "rank": null}, "Preset": {"status": "Present", "evidence": "Managed Superset", "rank": null}, "Sisense": {"status": "Present", "evidence": "Embedded analytics vendor", "rank": null}, "Qlik Sense": {"status": "Widely used", "evidence": "Established BI platform", "rank": 5}}, "lists": {"widely": [{"name": "Microsoft Power BI", "why": "Highest npm downloads; Microsoft BI standard"}, {"name": "Amazon QuickSight", "why": "AWS native BI"}, {"name": "Tableau", "why": "Enterprise BI leader"}], "rising": [{"name": "Apache Superset", "why": "Leading OSS BI; strong download growth"}, {"name": "ThoughtSpot", "why": "Search-driven analytics growth"}, {"name": "Metabase", "why": "Popular OSS BI"}], "emerging": [{"name": "Lightdash", "why": "dbt-native OSS BI; fast growth from small base"}, {"name": "Evidence", "why": "Code-based reporting"}, {"name": "Rill", "why": "Operational dashboards"}]}}, "transform": {"tools": {"dbt": {"status": "Widely used", "evidence": "Industry default for analytics engineering; 76M-114M PyPI downloads/month (pypistats 2026)", "rank": 1}, "SQLMesh": {"status": "Rising", "evidence": "OSS challenger to dbt; PyPI downloads rising ~352K to 453K Apr-Sep 2026", "rank": 1}, "Coalesce": {"status": "Emerging", "evidence": "Commercial ELT transformation platform; limited public install metrics", "rank": 1}, "Dataform": {"status": "Present", "evidence": "Google Cloud native (primarily BigQuery); limited standalone public metrics", "rank": 2}, "Apache Spark": {"status": "Widely used", "evidence": "Ubiquitous distributed compute; no single public monthly download series (many distributions)", "rank": 2}}, "lists": {"widely": [{"name": "dbt", "why": "Industry default for analytics engineering"}, {"name": "Apache Spark", "why": "Ubiquitous distributed compute engine"}, {"name": "SQLMesh", "why": "Growing OSS alternative"}], "rising": [{"name": "SQLMesh", "why": "OSS challenger to dbt; rising PyPI downloads"}, {"name": "dbt", "why": "Continued dominance with very high downloads"}, {"name": "Coalesce", "why": "Commercial ELT transformation"}], "emerging": [{"name": "Coalesce", "why": "Commercial ELT transformation platform"}, {"name": "Dataform", "why": "GCP-native (primarily BigQuery)"}, {"name": "SQLMesh", "why": "Still smaller than dbt but growing fast"}]}}, "stream": {"tools": {"Apache Kafka": {"status": "Widely used", "evidence": "Industry consensus: de-facto streaming standard; estimates of 150k+ organizations (Kai Waehner / Conduktor landscape 2026)", "rank": 1}, "Confluent": {"status": "Widely used", "evidence": "Public company; commercial Kafka leader; subscription revenue disclosed in earnings", "rank": 2}, "Apache Flink": {"status": "Rising", "evidence": "Confluent Q3 2025: Flink ARR grew >70% sequential; >1,000 paying Flink customers", "rank": 1}, "Amazon Kinesis": {"status": "Widely used", "evidence": "AWS native streaming service; standard choice on AWS (no public install counts)", "rank": 3}, "Google Cloud Pub/Sub": {"status": "Widely used", "evidence": "GCP native messaging; standard choice on GCP (no public install counts)", "rank": null}, "Azure Event Hubs": {"status": "Widely used", "evidence": "Azure native event streaming; standard choice on Azure (no public install counts)", "rank": null}, "Apache Pulsar": {"status": "Emerging", "evidence": "Active OSS project; used in some cloud-native stacks; smaller footprint than Kafka in industry surveys", "rank": 3}, "Redpanda": {"status": "Rising", "evidence": "Kafka-compatible engine; growing mentions in cloud-native / cost-focused deployments", "rank": 2}, "Apache Beam": {"status": "Widely used", "evidence": "Portable model underlying Google Dataflow and used with Flink/Spark; broad engine support", "rank": 3}, "Materialize": {"status": "Emerging", "evidence": "Streaming SQL database; active product and community; smaller market than Kafka/Flink", "rank": 2}, "RisingWave": {"status": "Emerging", "evidence": "Streaming database; open-source growth; still early vs Kafka/Flink", "rank": 1}}, "lists": {"widely": [{"name": "Apache Kafka", "why": "De-facto streaming standard; largest estimated installed base"}, {"name": "Confluent", "why": "Commercial Kafka leader; public company with disclosed growth"}, {"name": "Amazon Kinesis", "why": "Default streaming choice on AWS; very large AWS footprint"}], "rising": [{"name": "Apache Flink", "why": "Fastest growth signal: Confluent Flink ARR >70% sequential"}, {"name": "Redpanda", "why": "Kafka-compatible; growing in cloud-native / cost-focused stacks"}, {"name": "Apache Beam", "why": "Broad engine support (Dataflow, Flink, Spark); portable model"}], "emerging": [{"name": "RisingWave", "why": "Streaming database; active open-source growth"}, {"name": "Materialize", "why": "Streaming SQL; active product, smaller market"}, {"name": "Apache Pulsar", "why": "Used in some cloud-native stacks; smaller than Kafka"}]}}, "store": {"tools": {"DuckDB": {"status": "Rising", "evidence": "PyPI downloads rising (31M to 54M Apr-Sep 2026); DuckCon 2026 strong adoption metrics", "rank": 3, "pkg": "duckdb"}, "MotherDuck": {"status": "Emerging", "evidence": "Cloud DuckDB; active (acquired Tower 2026); tied to DuckDB ecosystem growth", "rank": 1, "pkg": "Cloud DuckDB. Active growth; acquired Tower (2026). No public monthly install series. Tied to DuckDB ecosystem."}, "Snowflake": {"status": "Widely used", "evidence": "Public company; top-3 cloud warehouse by revenue/adoption in 2026 industry analyses", "rank": 1, "pkg": "Public company. Widely used cloud warehouse. Google Trends: competitive with Databricks; some markets declining vs Databricks 2026. No public monthly install series."}, "Databricks": {"status": "Widely used", "evidence": "Top lakehouse platform; Google Trends analyses show rising interest vs Snowflake in US/UK/DE 2026", "rank": 2, "pkg": "Widely used lakehouse. Google Trends: rising vs Snowflake in US/UK/DE 2026 (industry analyses). No public monthly install series."}, "Google BigQuery": {"status": "Widely used", "evidence": "GCP serverless warehouse; top-tier adoption on Google Cloud", "rank": 3, "pkg": "Widely used (GCP). Serverless warehouse. No public monthly install series."}, "Amazon Redshift": {"status": "Widely used", "evidence": "AWS mature warehouse; widely deployed; some reports of relative lag vs peers", "rank": null, "pkg": "Widely used (AWS). Mature; some reports of relative lag vs peers. No public monthly install series."}, "Azure Synapse Analytics": {"status": "Widely used", "evidence": "Azure analytics service; widely deployed in Microsoft estates", "rank": null, "pkg": "Widely used (Azure). No public monthly install series."}, "Microsoft Fabric": {"status": "Rising", "evidence": "Microsoft Sep 2026: ~40K Fabric customers; expanding to 425K+ Power BI users", "rank": 1, "pkg": "Rising fast. Microsoft: ~40K Fabric customers; expanding to 425K+ Power BI users (Sep 2026). No public monthly install series."}, "Apache Iceberg": {"status": "Rising", "evidence": "De-facto open table format winner 2025-2026 (industry consensus); strong pyiceberg downloads", "rank": 2, "pkg": "pyiceberg"}, "Delta Lake": {"status": "Widely used", "evidence": "Strong in Databricks/Spark ecosystems; mature open table format", "rank": null, "pkg": "delta-spark"}, "Apache Hudi": {"status": "Present", "evidence": "Used for upsert/CDC lakehouse workloads; smaller PyPI footprint than Iceberg/Delta", "rank": 3, "pkg": "hudi"}, "ClickHouse": {"status": "Rising", "evidence": "Strong real-time OLAP growth; high PyPI client downloads and job demand", "rank": 2, "pkg": "clickhouse-connect"}, "Trino": {"status": "Widely used", "evidence": "Leading federated query engine; broad connector ecosystem; strong PyPI downloads", "rank": null, "pkg": "trino"}}, "lists": {"widely": [{"name": "Snowflake", "why": "Top-3 cloud warehouse by revenue/adoption"}, {"name": "Databricks", "why": "Top lakehouse platform; rising vs Snowflake in several markets"}, {"name": "Google BigQuery", "why": "Top-tier serverless warehouse on GCP"}], "rising": [{"name": "Microsoft Fabric", "why": "Microsoft: ~40K customers; expanding to 425K+ Power BI users"}, {"name": "Apache Iceberg", "why": "De-facto open table format winner 2025-2026"}, {"name": "DuckDB", "why": "PyPI downloads rising strongly; embedded analytics growth"}], "emerging": [{"name": "MotherDuck", "why": "Cloud DuckDB; active growth and acquisitions"}, {"name": "ClickHouse", "why": "Strong real-time OLAP growth"}, {"name": "Apache Hudi", "why": "Present in CDC/upsert lakehouse niche"}]}}, "dq": {"tools": {"Great Expectations": {"status": "Widely used", "evidence": "Most adopted open-source DQ framework; 20M+ PyPI downloads/month", "rank": 2, "pkg": "great-expectations"}, "Soda": {"status": "Rising", "evidence": "Soda Core OSS + Cloud; multi-million monthly PyPI downloads", "rank": 3, "pkg": "soda-core"}, "Elementary": {"status": "Rising", "evidence": "dbt-native observability; growing with dbt adoption; ~1M PyPI downloads/month", "rank": 1, "pkg": "elementary-data"}, "Monte Carlo": {"status": "Widely used", "evidence": "Commercial observability incumbent; largest mindshare in category comparisons; pycarlo downloads", "rank": 1, "pkg": "pycarlo"}, "Metaplane": {"status": "Present", "evidence": "Acquired by Datadog Apr 2025; PeerSpot mindshare ~4.2%; no standalone public install series", "rank": null, "pkg": "Acquired by Datadog (Apr 2025). PeerSpot mindshare ~4.2% (up from 3.1%). No public monthly install series."}, "Bigeye": {"status": "Present", "evidence": "Active commercial competitor in 2026 comparisons; no public monthly install series", "rank": null, "pkg": "Commercial data observability. Active competitor to Monte Carlo/Anomalo. No public monthly install series."}, "Anomalo": {"status": "Rising", "evidence": "ML-native challenger; public PyPI package with growing downloads", "rank": 2, "pkg": "anomalo"}, "Acceldata": {"status": "Present", "evidence": "PeerSpot mindshare ~12.7% in data observability; commercial; no public monthly install series", "rank": null, "pkg": "PeerSpot mindshare ~12.7% in Data Observability. Commercial; no public monthly install series."}}, "lists": {"widely": [{"name": "Monte Carlo", "why": "Commercial observability incumbent; largest mindshare"}, {"name": "Great Expectations", "why": "Most adopted open-source DQ framework"}, {"name": "Soda", "why": "Major OSS + commercial DQ presence"}], "rising": [{"name": "Elementary", "why": "dbt-native; growing with dbt adoption"}, {"name": "Anomalo", "why": "ML-native challenger; growing PyPI downloads"}, {"name": "Soda", "why": "Strong OSS download footprint"}], "emerging": []}}, "catalog": {"tools": {"Unity Catalog": {"status": "Widely used", "evidence": "Default governance layer for Databricks; open-source Unity Catalog (Linux Foundation sandbox)", "rank": 1}, "Alation": {"status": "Widely used", "evidence": "Long-standing enterprise data catalog; frequently named as leader in enterprise comparisons", "rank": 2}, "Collibra": {"status": "Widely used", "evidence": "Enterprise governance + catalog platform; major installed base", "rank": 3}, "Atlan": {"status": "Rising", "evidence": "Modern catalog; strong momentum in cloud-native / modern data stack discussions", "rank": 3}, "DataHub": {"status": "Rising", "evidence": "Leading OSS metadata platform; acryl-datahub 3.6M-5.0M PyPI downloads/month Apr-Sep 2026; 3,000+ orgs claimed", "rank": 1}, "OpenMetadata": {"status": "Rising", "evidence": "OSS catalog; ~15k GitHub stars; openmetadata-ingestion PyPI downloads; rapid community growth", "rank": 2}, "Amundsen": {"status": "Present", "evidence": "Lyft-origin OSS catalog; less active than DataHub/OpenMetadata in 2026", "rank": null}, "Microsoft Purview": {"status": "Widely used", "evidence": "Native Microsoft data governance; standard in Microsoft estates", "rank": null}, "Apache Atlas": {"status": "Present", "evidence": "OSS; still used in Hadoop/on-prem estates; limited growth signal vs modern catalogs", "rank": null}}, "lists": {"widely": [{"name": "Unity Catalog", "why": "Default governance for Databricks estates"}, {"name": "Alation", "why": "Enterprise data catalog leader"}, {"name": "Collibra", "why": "Enterprise governance + catalog platform"}], "rising": [{"name": "DataHub", "why": "Leading OSS metadata; strong PyPI downloads; 3,000+ orgs"}, {"name": "OpenMetadata", "why": "OSS catalog; rapid community growth (~15k stars)"}, {"name": "Atlan", "why": "Modern catalog; strong momentum in cloud-native stacks"}], "emerging": []}}};

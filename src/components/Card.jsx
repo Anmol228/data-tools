@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useStore, select, step, openProfile } from "../store.js";
 import { CATEGORIES, MEDIA_BG, host, reduceMotion } from "../lib/categories.js";
-import { Icon, Logo, TierBadge, Plans, RankText } from "./bits.jsx";
+import { Icon, Logo, TierBadge, Plans } from "./bits.jsx";
+import MarketStatus from "./MarketStatus.jsx";
 import { ConnCard } from "./Connectors.jsx";
 
 // Scrolls the profile to one of its sections after the open animation.
@@ -43,9 +44,9 @@ function Card({ cat, i, swap }) {
       <dl className="meta" style={{ "--i": 3 }}>
         <dt>Website</dt><dd><a target="_blank" rel="noopener" href={t.url}>{host(t.url)}</a></dd>
         <dt>Tier</dt><dd><TierBadge className="tier-badge" tier={t.tier} /></dd>
-        <dt>Market rank</dt><dd className="card-rank rank-line"><RankText name={t.name} /></dd>
+        <dt>Market status</dt><dd className="card-rank"><MarketStatus name={t.name} /></dd>
         <dt>Pricing</dt><dd><Plans text={t.price} /></dd>
-        <dt>Source</dt><dd><a className="price-src" target="_blank" rel="noopener" href={t.priceUrl}>Official pricing page</a> <span className="src-note price-note">{"· " + (t.priceNote || "prices as listed in the sheet")}</span></dd>
+        <dt>Source</dt><dd><a className="price-src" target="_blank" rel="noopener" href={t.priceUrl}>Official pricing page</a> <span className="src-note price-note">{"· " + (t.priceNote || "prices from our research")}</span></dd>
       </dl>
       <ConnCard cat={cat} t={t} onMore={() => { open(); scrollProfileTo(".pf-conn"); }} />
       <div className="card-nav" style={{ "--i": 4 }}>

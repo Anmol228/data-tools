@@ -1,7 +1,7 @@
 import { useStore, getState } from "../store.js";
 import { CATEGORIES } from "../lib/categories.js";
 import { logoFor } from "../lib/logos.js";
-import { segFor, rankSeg, fmtPct, popText, noDataText, monthVal } from "../lib/ranking.js";
+import { fmtPct, noDataText, monthVal } from "../lib/ranking.js";
 import { tipProps } from "./Tooltip.jsx";
 
 // Small shared pieces used by the card, the profile, the trends section and the charts page.
@@ -44,17 +44,6 @@ export function Plans({ text, className = "plans" }) {
   );
 }
 
-// "Market rank" value for a tool, or a plain statement that there is no data.
-export function RankText({ name }) {
-  const cat = useStore((s) => s.activeCat);
-  const seg = segFor(cat);
-  const rows = seg ? rankSeg(seg) : [];
-  const row = rows.find((r) => r.t.name === name);
-  if (row) {
-    return <><b>{`#${row.rank} of ${rows.length}`}</b>{` in ${seg.label} · growth #${row.gR} (${fmtPct(row.t.growth)}) · popularity #${row.pR} (${popText(seg, row.t)})`}</>;
-  }
-  return <span className="no-data">{noDataText(seg, name)}</span>;
-}
 
 // Monthly bar chart for one tool (charts page, hover card and profile).
 export function MonthlyChart({ seg, name, big }) {
@@ -70,7 +59,7 @@ export function MonthlyChart({ seg, name, big }) {
             <span className={"mbar" + (k === t.m.length - 1 ? " last" : "")} style={{ height: Math.max(2, (v / max) * 100) + "%" }}
               tabIndex={big ? 0 : -1}
               {...tipProps(() => [`${seg.months[k]} 2026`, `${monthVal(seg, v)} ${seg.cat === "etl" ? "search index" : "downloads"}`,
-                k ? `${fmtPct(v / t.m[k - 1] - 1)} vs ${seg.months[k - 1]}` : "First month in the sheet"])} />
+                k ? `${fmtPct(v / t.m[k - 1] - 1)} vs ${seg.months[k - 1]}` : "First month in the data"])} />
             <span className="mlab">{seg.months[k]}</span>
           </div>
         ))}

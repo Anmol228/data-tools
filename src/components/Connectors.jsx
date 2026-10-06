@@ -1,7 +1,7 @@
 import { ETL_CONNECTORS, TOOL_CONN } from "../data.js";
 import { CATEGORIES } from "../lib/categories.js";
 
-// Databases, warehouses and lakes for every tool, from the workbook (v6): sheet "DB Warehouse Lake Connectors"
+// Databases, warehouses and lakes for every tool (researched data, "DB Warehouse Lake Connectors")
 // (key systems named from official docs, 2025-2026; not a full catalogue). "scope" is the official connector
 // scope from the "Connector Counts" sheet, or the Tools sheet's "Supported Sources / Connectors" column.
 export const dbFor = (cat, name) => (CATEGORIES[cat].tools.some((t) => t.name === name) ? TOOL_CONN[name] || null : null);
@@ -24,6 +24,12 @@ export function DbBlock({ cat, name, max, children }) {
   return (
     <div className="conn-db">
       {d.scope && <p className="db-scope"><b>Official connector scope: </b>{d.scope}</p>}
+      {(d.noList || d.scopeMissing) && (
+        <p className="db-scope no-data">
+          {[d.scopeMissing ? "Official connector scope: not stated in the researched data (see the tool's official documentation)." : "",
+            d.noList ? "Named databases, warehouses and lakes: not listed in the researched data for this tool." : ""].filter(Boolean).join(" ")}
+        </p>
+      )}
       {[["db", "Databases", d.db], ["wh", "Warehouses & lakes", d.wh], ["other", "Other access", d.other]].map(([k, title, list]) => {
         if (!list.length) return null;
         const names = max ? list.slice(0, max) : list;
@@ -100,11 +106,11 @@ export function ConnProfile({ cat, t }) {
         {!hidden && (
           <div className="conn">
             <DbBlock cat={cat} name={t.name} max={0}>
-              {d && <p className="conn-foot">{`How it connects: ${d.dir}${d.note ? " (" + d.note + ")" : ""}. From your workbook's "DB Warehouse Lake Connectors" sheet: the key databases, warehouses and lakes named in official docs (2025-2026), not a full catalogue.`}</p>}
+              {d && !d.noList && <p className="conn-foot">{`How it connects: ${d.dir}${d.note ? " (" + d.note + ")" : ""}. Researched data: the key databases, warehouses and lakes named in official docs (2025-2026), not a full catalogue.`}</p>}
             </DbBlock>
             {c && (
               <>
-                <div className="conn-label">Connector types (from the workbook)</div>
+                <div className="conn-label">Connector types (researched data)</div>
                 <div className="pf-conn-grid">
                   {ETL_CONNECTORS.cats.map((n, k) => (
                     <span key={n} className={"conn-cat " + (c.cats[k] ? "yes" : "no")}>

@@ -28,7 +28,9 @@ export function logoFor(cat, i) {
   const w = img.width, h = img.height;
   const ctx = c.getContext("2d");
   ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, 384, 384);
-  ctx.drawImage(img, w * 0.5, h * 0.215, w * 0.47, h * 0.69, 34, 34, 316, 316);
+  // The five newer segments' models place the tile edge slightly further in, so trim a little more there.
+  const trim = ["etl", "orch", "bi"].includes(cat) ? 0 : 0.02;
+  ctx.drawImage(img, w * (0.5 + trim), h * (0.215 + trim), w * (0.47 - 2 * trim), h * (0.69 - 2 * trim), 34, 34, 316, 316);
   try { logoCache[key] = c.toDataURL("image/png"); } catch (err) { return null; }
   return logoCache[key];
 }

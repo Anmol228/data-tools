@@ -1,57 +1,68 @@
 import { Fragment, useEffect, useRef } from "react";
 import { useStore, openTrends, closeTrends, openTopPage, openTop } from "../store.js";
 import { CATEGORIES } from "../lib/categories.js";
-import { segFor, rankSeg, widelyUsed, emergingTop, popShort, fmtPct, medianOf } from "../lib/ranking.js";
+import { segFor, rankSeg, popShort, fmtPct, medianOf } from "../lib/ranking.js";
+import { statusLists, numFor, metricFor, ST_LABEL } from "../lib/status.js";
 import { Icon, Logo, indexOfTool } from "./bits.jsx";
+import { RatedBox } from "./MarketStatus.jsx";
 import { showHoverChart, hideHoverChart } from "./HoverChart.jsx";
 
-// Small market-trends pop-up: the segment's trend line and the top tools' icons only.
-function TrendPop({ cat, seg, rows }) {
+const KEYS = ["widely", "rising", "emerging"];
+
+// Small market-trends pop-up: the segment's typical change, the status lists' icons and how statuses are rated.
+function TrendPop({ cat }) {
+  const seg = segFor(cat), L = statusLists(cat);
+  const rows = seg ? rankSeg(seg) : [];
   return (
     <>
       <div className="tp-seg">{`Market trends · ${CATEGORIES[cat].label}`}</div>
-      {!rows.length ? (
-        <p className="tp-line no-data">No market-trend data available for this segment.</p>
+      {rows.length ? (
+        <p className="tp-line">{`Typical change in ${metricFor(cat).lower}: `}<b>{fmtPct(medianOf(seg.tools.map((t) => t.growth)))}</b>{` across ${rows.length} tools with monthly numbers, Apr to Sep 2026.`}</p>
       ) : (
-        <>
-          <p className="tp-line">Median change <b>{fmtPct(medianOf(seg.tools.map((t) => t.growth)))}</b>{` across ${rows.length} tracked tools, Apr to Sep 2026 (${seg.cat === "etl" ? "search interest" : "downloads"}).`}</p>
-          {[["Most widely used", widelyUsed(seg)], ["Emerging", emergingTop(seg)]].map(([label, list]) => (
-            <Fragment key={label}>
-              <div className="tp-seg">{label}</div>
-              <div className="tp-icons">
-                {list.map((r) => (
-                  <button key={r.t.name} type="button" className="tp-icon" title={r.t.name} aria-label={`${label}: ${r.t.name}. Open full details`}
-                    onClick={(e) => openTop(r.t.name, e.currentTarget)}>
-                    <Logo cat={seg.cat} i={indexOfTool(seg.cat, r.t.name)} fallback={r.t.name.slice(0, 2)} />
-                  </button>
-                ))}
-              </div>
-            </Fragment>
-          ))}
-        </>
+        <p className="tp-line no-data">Monthly trend: not publicly available for this segment. Statuses below come from our research into adoption.</p>
       )}
+      {KEYS.filter((k) => L[k].length).map((k) => (
+        <Fragment key={k}>
+          <div className="tp-seg">{ST_LABEL[k]}</div>
+          <div className="tp-icons">
+            {L[k].map((x) => (
+              <button key={x.name} type="button" className="tp-icon" title={x.name} aria-label={`${ST_LABEL[k]}: ${x.name}. Open full details`}
+                onClick={(e) => openTop(x.name, e.currentTarget)}>
+                <Logo cat={cat} i={indexOfTool(cat, x.name)} fallback={x.name.slice(0, 2)} />
+              </button>
+            ))}
+          </div>
+        </Fragment>
+      ))}
+      <RatedBox cat={cat} className="tp-line tp-rated" />
     </>
   );
 }
 
-// Most widely used top 3 (popularity rank) and Emerging top 3 (growth rank).
-function Group({ title, seg, rows, value }) {
+// One status list (Widely used / Rising / Emerging) as a full-width row of chips.
+function Group({ cat, k }) {
+  const seg = segFor(cat), L = statusLists(cat), title = ST_LABEL[k];
+  const value = (x, idx) => {
+    const t = numFor(cat, x.name);
+    if (t && k === "widely") return <b>{popShort(seg, t.pop)}</b>;
+    if (t) return <>{cat === "etl" ? <><small className="st-basis">Search</small> </> : null}<b className={t.growth >= 0 ? "up" : "down"}>{fmtPct(t.growth)}</b></>;
+    return <b className="st-rank">#{idx + 1}</b>;
+  };
   return (
     <div className="t5-group">
       <div className="t5-group-h"><b>{title}</b></div>
       <ol className="t5-mini">
-        {!rows.length && <li className="no-data">No data available.</li>}
-        {rows.map((r) => (
-          <li key={r.t.name}>
-            <button type="button" className="t5-chip" title={r.t.name} aria-label={`${title}: ${r.t.name}. Open full details`}
-              onClick={(e) => { hideHoverChart(true); openTop(r.t.name, e.currentTarget); }}
-              onMouseEnter={(e) => showHoverChart(e.currentTarget, seg, r.t.name)}
-              onFocus={(e) => showHoverChart(e.currentTarget, seg, r.t.name)}
+        {L[k].map((x, idx) => (
+          <li key={x.name}>
+            <button type="button" className="t5-chip" title={x.name} aria-label={`${title}: ${x.name}. Open full details`}
+              onClick={(e) => { hideHoverChart(true); openTop(x.name, e.currentTarget); }}
+              onMouseEnter={(e) => showHoverChart(e.currentTarget, seg, x.name)}
+              onFocus={(e) => showHoverChart(e.currentTarget, seg, x.name)}
               onMouseLeave={() => hideHoverChart()}
               onBlur={() => hideHoverChart()}>
-              <span className="tg-logo" aria-hidden="true"><Logo cat={seg.cat} i={indexOfTool(seg.cat, r.t.name)} fallback={r.t.name.slice(0, 2)} /></span>
-              <span className="tg-name">{r.t.name}</span>
-              <span className="t5-chip-v">{value(r)}</span>
+              <span className="tg-logo" aria-hidden="true"><Logo cat={cat} i={indexOfTool(cat, x.name)} fallback={x.name.slice(0, 2)} /></span>
+              <span className="tg-name">{x.name}</span>
+              <span className="t5-chip-v">{value(x, idx)}</span>
             </button>
           </li>
         ))}
@@ -65,8 +76,8 @@ export default function TrendsSection() {
   const trendsOpen = useStore((s) => s.trendsOpen);
   const popRef = useRef(null);
   const btnRef = useRef(null);
-  const seg = segFor(cat);
-  const rows = seg ? rankSeg(seg) : [];
+  const L = statusLists(cat);
+  const keys = KEYS.filter((k) => L[k].length);
 
   useEffect(() => {
     if (!trendsOpen) return;
@@ -90,18 +101,15 @@ export default function TrendsSection() {
         </button>
       </div>
       <div className="trend-pop" id="trendPop" role="dialog" aria-label="Market trends" hidden={!trendsOpen} ref={popRef}>
-        {trendsOpen && <TrendPop cat={cat} seg={seg} rows={rows} />}
+        {trendsOpen && <TrendPop cat={cat} />}
       </div>
       <ol className="t5-list" id="t5List" aria-live="polite">
-        {!rows.length && <li className="t5-empty">No market-trend data available for this segment.</li>}
+        {!keys.length && <li className="t5-empty">No market status available for this segment in our research.</li>}
       </ol>
-      <div className="t5-pair" id="t5Pair">
-        {rows.length > 0 && (
-          <>
-            <Group title="Most widely used" seg={seg} rows={widelyUsed(seg)} value={(r) => <b>{popShort(seg, r.t.pop)}</b>} />
-            <Group title="Emerging" seg={seg} rows={emergingTop(seg)} value={(r) => <b className={r.t.growth >= 0 ? "up" : "down"}>{fmtPct(r.t.growth)}</b>} />
-          </>
-        )}
+      {/* One full-width row per list, so tool names never break. */}
+      <div className="t5-pair t5-three" id="t5Pair">
+        {keys.map((k) => <Group key={k} cat={cat} k={k} />)}
+        {keys.length > 0 && <RatedBox cat={cat} className="t5-note t5-rated" />}
       </div>
     </section>
   );

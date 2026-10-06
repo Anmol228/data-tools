@@ -1,14 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { useStore, switchCategory } from "../store.js";
-import { CATEGORIES, reduceMotion } from "../lib/categories.js";
+import { CATEGORIES, reduceMotion, shortLabel } from "../lib/categories.js";
 import { sfx } from "../lib/sfx.js";
 import { Icon } from "./bits.jsx";
 import ViewsPill from "./ViewsPill.jsx";
+import githubLogo from "../assets/github.png";
+import linkedinLogo from "../assets/linkedin.png";
 
 const TAB_ICONS = {
   etl: <Icon d={["M4 7h11M12 4l3 3-3 3", "M20 17H9M12 14l-3 3 3 3"]} />,
   orch: <Icon><circle cx="6" cy="6" r="2.5" /><circle cx="18" cy="6" r="2.5" /><circle cx="12" cy="18" r="2.5" /><path d="M8.5 6h7M7.3 8.2l3.5 7.6M16.7 8.2l-3.5 7.6" /></Icon>,
-  bi: <Icon d={["M4 20h16", "M7 16v-5M12 16V6M17 16v-8"]} />
+  bi: <Icon d={["M4 20h16", "M7 16v-5M12 16V6M17 16v-8"]} />,
+  transform: <Icon d={["M4 6h6v6H4z", "M14 12h6v6h-6z", "M10 9h4a2 2 0 012 2v1", "M14 15h-4a2 2 0 01-2-2v-1"]} />,
+  stream: <Icon d={["M3 8c3-3 6 3 9 0s6 3 9 0", "M3 13c3-3 6 3 9 0s6 3 9 0", "M3 18c3-3 6 3 9 0s6 3 9 0"]} />,
+  store: <Icon><ellipse cx="12" cy="5.5" rx="7" ry="2.5" /><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13" /><path d="M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5" /></Icon>,
+  dq: <Icon d={["M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z", "M9 12l2 2 4-4"]} />,
+  catalog: <Icon d={["M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3z", "M5 17a3 3 0 013-3h11", "M9 8h6"]} />
 };
 
 export default function Header() {
@@ -43,7 +50,15 @@ export default function Header() {
 
   return (
     <header className={swapping ? "swapping" : undefined}>
-      <ViewsPill />
+      <div className="hdr-links">
+        <ViewsPill />
+        <a className="views-pill repo-link icon-only" title="Source code on GitHub" href="https://github.com/Anmol228/data-tools" target="_blank" rel="noopener" aria-label="Source code on GitHub (opens in a new tab)">
+          <img className="link-logo round" src={githubLogo} alt="" width="20" height="20" />
+        </a>
+        <a className="views-pill repo-link icon-only" title="Anmol Shukla on LinkedIn" href="https://www.linkedin.com/in/anmol-shukla-274043159" target="_blank" rel="noopener" aria-label="Anmol Shukla on LinkedIn (opens in a new tab)">
+          <img className="link-logo" src={linkedinLogo} alt="" width="18" height="18" />
+        </a>
+      </div>
       <div>
         <div className="eyebrow" id="pageEyebrow">{CATEGORIES[shown].eyebrow}</div>
         <h1 id="pageTitle">{CATEGORIES[shown].title}</h1>
@@ -56,7 +71,7 @@ export default function Header() {
           <button key={k} type="button" role="tab" className="tab" id={"tab-" + k} data-cat={k} aria-selected={String(k === current)}
             ref={(el) => { tabRefs.current[k] = el; }} onClick={() => choose(k)} onKeyDown={(e) => onKey(e, k)}>
             {TAB_ICONS[k]}
-            <span>{CATEGORIES[k].label}</span><span className="tab-count">{CATEGORIES[k].tools.length}</span>
+            <span>{shortLabel(k)}</span><span className="tab-count">{CATEGORIES[k].tools.length}</span>
           </button>
         ))}
       </nav>

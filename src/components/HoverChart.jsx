@@ -1,6 +1,7 @@
 import { Fragment, useLayoutEffect, useRef, useState, useSyncExternalStore, useEffect } from "react";
 import { openTop } from "../store.js";
-import { monthInsights, monthVal, fmtPct, noteFor, noDataText } from "../lib/ranking.js";
+import { monthInsights, monthVal, fmtPct, noteFor } from "../lib/ranking.js";
+import MarketStatus from "./MarketStatus.jsx";
 import { MonthlyChart } from "./bits.jsx";
 import { hideTip } from "./Tooltip.jsx";
 import { scrollProfileTo } from "./Card.jsx";
@@ -56,12 +57,18 @@ export default function HoverChart() {
   if (cur) {
     const { seg, name, anchor } = cur;
     const t = seg && seg.tools.find((x) => x.name === name);
-    if (!t) content = <p className="no-data viz-empty">{noDataText(seg, name)}</p>;
+    if (!t) content = (
+      <>
+        <div className="hv-status"><MarketStatus name={name} /></div>
+        <button type="button" className="hv-open" onClick={() => { hideHoverChart(true); openTop(name, anchor); }}>Open full details</button>
+      </>
+    );
     else {
       const ins = monthInsights(seg, t);
       const note = noteFor(seg.cat, name);
       content = (
         <>
+          <p className="hv-st"><MarketStatus name={name} compact /></p>
           <div className="hv-tabs" role="tablist">
             {VIEWS.map(([v, label]) => <button key={v} type="button" role="tab" data-v={v} aria-selected={String(v === view)} onClick={() => setView(v)}>{label}</button>)}
           </div>

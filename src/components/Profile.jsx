@@ -2,7 +2,8 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { useStore, getState, closeProfile, profileGo, step } from "../store.js";
 import { CATEGORIES, pad, host, reduceMotion } from "../lib/categories.js";
 import { segFor } from "../lib/ranking.js";
-import { Icon, Logo, TierBadge, Plans, RankText, MonthlyChart } from "./bits.jsx";
+import { Icon, Logo, TierBadge, Plans, MonthlyChart } from "./bits.jsx";
+import MarketStatus from "./MarketStatus.jsx";
 import { ConnProfile } from "./Connectors.jsx";
 
 const insetFor = (r) => `inset(${r.top}px ${innerWidth - r.right}px ${innerHeight - r.bottom}px ${r.left}px round 18px)`;
@@ -77,7 +78,7 @@ export default function Profile() {
             <Icon d="M15 5l-7 7 7 7" />Back to stage
           </button>
           <div className="pf-bar-right">
-            <span className="pf-count count">{`Tool ${pad(t.n)} of ${pad(tools.length)}`}</span>
+            <span className="pf-count count">{`Tool ${pad(index + 1)} of ${pad(tools.length)}`}</span>
             <button type="button" className="pf-btn pf-icon pf-prev" aria-label="Previous tool" onClick={() => profileGo(-1)}>
               <Icon d="M15 5l-7 7 7 7" />
             </button>
@@ -105,10 +106,10 @@ export default function Profile() {
 
         <section className="pf-pricing pf-trend" aria-labelledby="pfTrendTitle">
           <div className="pf-pricing-head">
-            <h2 id="pfTrendTitle">Market trend, Apr to Sep 2026</h2>
-            <span className="src-note pf-trend-rank rank-line"><RankText name={t.name} /></span>
+            <h2 id="pfTrendTitle">Market status and trend, Apr to Sep 2026</h2>
+            <span className="src-note pf-trend-rank"></span>
           </div>
-          <div className="pf-trend-chart"><MonthlyChart seg={seg} name={t.name} big /></div>
+          <div className="pf-trend-chart"><div className="pf-status"><MarketStatus name={t.name} /></div>{hasTrend && <MonthlyChart seg={seg} name={t.name} big />}</div>
           <p className="src-note pf-trend-src" style={{ margin: 0 }}>{hasTrend ? `${seg.unit}. ${seg.source}` : ""}</p>
         </section>
 
@@ -119,14 +120,14 @@ export default function Profile() {
             <TierBadge className="tier-badge pf-tier" tier={t.tier} />
           </div>
           <Plans className="plans pf-plans" text={t.price} />
-          <p className="src-note" style={{ margin: 0 }}><span className="pf-price-note">{t.priceNote ? t.priceNote + "." : "Prices as listed in the sheet."}</span> Check the <a className="pf-price-src" target="_blank" rel="noopener" href={t.priceUrl}>official pricing page</a> for current rates.</p>
+          <p className="src-note" style={{ margin: 0 }}><span className="pf-price-note">{t.priceNote ? t.priceNote + "." : "Prices from our research."}</span> Check the <a className="pf-price-src" target="_blank" rel="noopener" href={t.priceUrl}>official pricing page</a> for current rates.</p>
         </section>
 
         <dl className="pf-facts">
           <div><dt>Category</dt><dd className="pf-cat">{t.cat}</dd></div>
           <div><dt>Website</dt><dd><a className="pf-fact-site" target="_blank" rel="noopener" href={t.url}>{host(t.url)}</a></dd></div>
           <div><dt>Tier</dt><dd className="pf-tier-text">{t.tier}</dd></div>
-          <div><dt>Market rank</dt><dd className="pf-rank rank-line"><RankText name={t.name} /></dd></div>
+          <div><dt>Market status</dt><dd className="pf-rank"><MarketStatus name={t.name} compact /></dd></div>
         </dl>
 
         <button type="button" className="pf-next" onClick={() => profileGo(1)}>

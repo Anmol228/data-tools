@@ -1,8 +1,9 @@
 import { useLayoutEffect, useRef } from "react";
 import { useStore, closeTopPage, setTopView, switchCategory, openTop } from "../store.js";
-import { CATEGORIES } from "../lib/categories.js";
+import { CATEGORIES, shortLabel } from "../lib/categories.js";
 import { sfx } from "../lib/sfx.js";
-import { segFor, rankSeg, byGrowth, byPop, emergingTop, fmtPct, popShort, popText, noteFor, gapsFor } from "../lib/ranking.js";
+import { segFor, rankSeg, byGrowth, byPop, fmtPct, popShort, popText, noteFor, gapsFor } from "../lib/ranking.js";
+import { statusLists, numFor, sheetStatus, metricFor, ratedFor, NUMBER_SEGS, ST_LABEL } from "../lib/status.js";
 import { Icon, Logo, MonthlyChart, indexOfTool } from "./bits.jsx";
 import { tipProps, hideTip } from "./Tooltip.jsx";
 
@@ -12,10 +13,11 @@ const VIEW_TEXT = {
   popularity: ["By popularity", "6-month volume."]
 };
 
-function ToolButton({ seg, name, cls }) {
+function ToolButton({ seg, cat, name, cls }) {
+  const c = cat || seg.cat;
   return (
     <button type="button" className={cls} aria-label={`${name}: open full details`} onClick={(e) => openTop(name, e.currentTarget)}>
-      <span className="tg-logo" aria-hidden="true"><Logo cat={seg.cat} i={indexOfTool(seg.cat, name)} fallback={name.slice(0, 2)} /></span>
+      <span className="tg-logo" aria-hidden="true"><Logo cat={c} i={indexOfTool(c, name)} fallback={name.slice(0, 2)} /></span>
       <span className="tg-name">{name}</span>
     </button>
   );
@@ -33,29 +35,67 @@ function GrowthBar({ g, lo, hi }) {
   );
 }
 
-function ListCard({ seg, title, desc, items, valueOf, extra }) {
+// Widely used / Rising / Emerging, each with the researched evidence for every tool.
+function StatusCards({ cat }) {
+  const seg = segFor(cat), L = statusLists(cat), m = metricFor(cat);
+  const DESC = NUMBER_SEGS.includes(cat)
+    ? { widely: `Highest volume (${seg ? seg.popLabel : ""}).`,
+        rising: cat === "etl" ? "Ranked from our research into adoption. Google searches fell for every ETL / ELT tool from Apr to Sep, so the search change shown is still negative." : "Highest growth from Apr to Sep, counting only tools that grew.",
+        emerging: "" }
+    : { widely: "Ranked from our research into adoption.", rising: "Ranked from our research into adoption. Tools whose downloads fell are left out.", emerging: "Ranked from our research into adoption." };
   return (
-    <section className="tpg-card">
-      <h2>{title}</h2>
-      <p className="tpg-sub">{desc}</p>
-      {!items.length ? <p className="no-data">No data available.</p> : (
-        <>
-          <ol className="tlist">
-            {items.map((r, k) => {
-              const note = noteFor(seg.cat, r.t.name);
-              return (
-                <li key={r.t.name}>
-                  <span className="hrank">{k + 1}</span>
-                  <ToolButton seg={seg} name={r.t.name} cls="hwho" />
-                  <span className="tl-val">{valueOf(r)}</span>
-                  {note && !/^Topic:/.test(note) && <span className="tl-note">{note}</span>}
-                </li>
-              );
-            })}
-          </ol>
-          {extra && <p className="tpg-note">{extra}</p>}
-        </>
-      )}
+    <div className="tpg-pair">
+      {["widely", "rising", "emerging"].map((k) => {
+        const items = L[k];
+        if (!items.length && !(k === "rising" && NUMBER_SEGS.includes(cat) && seg)) return null;
+        return (
+          <section className="tpg-card" key={k}>
+            <h2>{`${ST_LABEL[k]}: top ${items.length || 3}`}</h2>
+            <p className="tpg-sub">{DESC[k]}</p>
+            {!items.length ? <p className="no-data">No tool rose from Apr to Sep, so there is no Rising list.</p> : (
+              <ol className="tlist">
+                {items.map((x, idx) => {
+                  const t = numFor(cat, x.name), S = sheetStatus(cat, x.name);
+                  const note = (S && S.evidence) || x.why;
+                  return (
+                    <li key={x.name}>
+                      <span className="hrank">{idx + 1}</span>
+                      <ToolButton cat={cat} name={x.name} cls="hwho" />
+                      <span className="tl-val">{t
+                        ? (k === "widely" ? <><b>{popShort(seg, t.pop)}</b> <small>{cat === "etl" ? "index" : "downloads"}</small></>
+                          : <><b className={t.growth >= 0 ? "up" : "down"}>{fmtPct(t.growth)}</b> <small>{m.lower}, Apr to Sep</small></>)
+                        : <small>No public monthly numbers</small>}</span>
+                      {note && <span className="tl-note">{note}</span>}
+                    </li>
+                  );
+                })}
+              </ol>
+            )}
+          </section>
+        );
+      })}
+    </div>
+  );
+}
+
+function StatusNotes({ cat }) {
+  const seg = segFor(cat), lines = [];
+  if (seg) {
+    lines.push(seg.source);
+    if (!NUMBER_SEGS.includes(cat) && seg.method) lines.push(seg.method);
+    const { noFigure, untracked } = gapsFor(seg);
+    if (noFigure.length) lines.push(`Not enough public data: ${noFigure.join(", ")}.`);
+    if (untracked.length) lines.push(`Monthly trend not publicly available for ${untracked.length} tools: ${untracked.join(", ")}. Their status, evidence and rank come from our research instead.`);
+  } else {
+    lines.push("No tool in this segment publishes monthly download numbers, so none are shown. Status, evidence and rank come from our research into adoption.");
+  }
+  lines.push("How statuses are rated: " + ratedFor(cat));
+  if (seg) lines.push(`${metricFor(cat).name}: ${metricFor(cat).what}`);
+  lines.push("Numbers are never estimated. Where a tool has no public monthly numbers, the page says so.");
+  return (
+    <section className="tpg-card tpg-notes">
+      <h2>About this data</h2>
+      {lines.map((t, k) => <p key={k}>{t}</p>)}
     </section>
   );
 }
@@ -63,16 +103,13 @@ function ListCard({ seg, title, desc, items, valueOf, extra }) {
 function Body({ cat, view }) {
   const seg = segFor(cat);
   const rows = seg ? rankSeg(seg) : [];
-  if (!rows.length) return null;
+  if (!rows.length) return <><StatusCards cat={cat} /><StatusNotes cat={cat} /></>;
   const list = view === "growth" ? byGrowth(seg) : view === "popularity" ? byPop(seg) : rows;
   const top = list.slice(0, 5);
   const gs = seg.tools.map((t) => t.growth);
   const lo = Math.min(0, ...top.map((r) => r.t.growth)), hi = Math.max(0, ...top.map((r) => r.t.growth));
   const pmax = Math.max(...top.map((r) => r.t.pop)) || 1;
   const cautions = top.map((r) => [r.t.name, noteFor(seg.cat, r.t.name)]).filter(([, n]) => n && !/^Topic:/.test(n));
-  const wide = byPop(seg).slice(0, 3);
-  const emerging = emergingTop(seg);
-  const { noFigure, untracked } = gapsFor(seg);
   return (
     <>
       {/* 1. Bar chart for the chosen view */}
@@ -97,7 +134,7 @@ function Body({ cat, view }) {
           ))}
         </ol>
         {seg.cat === "etl" && view !== "popularity" && Math.max(...gs) < 0 && (
-          <p className="tpg-note">Every ETL / ELT tool in the sheet had lower search interest in Sep than in Apr, so the growth bars all point left of zero.</p>
+          <p className="tpg-note">Every ETL / ELT tool had lower search interest in Sep than in Apr, so the growth bars all point left of zero.</p>
         )}
         {cautions.length > 0 && <ul className="tpg-cautions">{cautions.map(([nm, n]) => <li key={nm}><b>{nm + ": "}</b>{n}</li>)}</ul>}
       </section>
@@ -116,23 +153,11 @@ function Body({ cat, view }) {
         </div>
       </section>
 
-      {/* 3. Most widely used vs emerging */}
-      <div className="tpg-pair">
-        <ListCard seg={seg} title="Most widely used: top 3" desc={`Highest popularity (${seg.popLabel}).`} items={wide}
-          valueOf={(r) => <><b>{popShort(seg, r.t.pop)}</b> <small>{seg.cat === "etl" ? "index" : "downloads"}</small></>} />
-        <ListCard seg={seg} title="Emerging: top 3" desc="Top 3 by growth rank (change from Apr to Sep 2026)." items={emerging}
-          valueOf={(r) => <><b className={r.t.growth >= 0 ? "up" : "down"}>{fmtPct(r.t.growth)}</b> <small>Apr to Sep</small></>}
-          extra={emerging.length && emerging.every((r) => r.t.growth < 0) ? "No tool in this segment grew, so these are the smallest declines." : ""} />
-      </div>
+      {/* 3. Status lists: Widely used / Rising / Emerging */}
+      <StatusCards cat={cat} />
 
       {/* 4. Data notes and gaps, stated plainly */}
-      <section className="tpg-card tpg-notes">
-        <h2>About this data</h2>
-        {[seg.source,
-          noFigure.length ? `Not enough data in the sheet: ${noFigure.join(", ")}.` : "",
-          untracked.length ? `No data available for ${untracked.length} tools not tracked in the sheet: ${untracked.join(", ")}.` : ""
-        ].filter(Boolean).map((t, k) => <p key={k}>{t}</p>)}
-      </section>
+      <StatusNotes cat={cat} />
     </>
   );
 }
@@ -165,17 +190,17 @@ export default function ChartsPage() {
           <nav className="tpg-cats" aria-label="Segment">
             {Object.keys(CATEGORIES).map((k) => (
               <button key={k} type="button" className="tpg-cat" data-cat={k} aria-current={String(k === cat)}
-                onClick={() => { if (k === cat) return; sfx.tab(); switchCategory(k); }}>{CATEGORIES[k].label}</button>
+                onClick={() => { if (k === cat) return; sfx.tab(); switchCategory(k); }}>{shortLabel(k)}</button>
             ))}
           </nav>
         </div>
         <header className="tpg-head">
-          <div className="eyebrow">Market trends · Monthly sheets</div>
+          <div className="eyebrow">Market trends · Researched data</div>
           <h1 id="tpTitle">{`Top 5 · ${c.label}`}</h1>
           <p className="tpg-lede">{rows.length
             ? `${seg.unit}, Apr to Sep 2026. ${seg.method} ${rows.length} of ${c.tools.length} tools on this page have data.`
-            : "No market-trend data available for this segment."}</p>
-          <div className="tpg-views" role="radiogroup" aria-label="Rank by">
+            : "Monthly trend: not publicly available for this segment. The lists below are ranked from our research into adoption."}</p>
+          <div className="tpg-views" role="radiogroup" aria-label="Rank by" hidden={!rows.length}>
             {Object.keys(VIEW_TEXT).map((v) => (
               <button key={v} type="button" role="radio" className="tpg-view" data-view={v} aria-checked={String(v === view)} onClick={() => setTopView(v)}>{VIEW_TEXT[v][0]}</button>
             ))}

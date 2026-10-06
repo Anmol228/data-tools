@@ -42,10 +42,9 @@ export function gapsFor(seg) {
   return { noFigure, untracked };
 }
 export function noDataText(seg, name) {
-  if (!seg) return "No data available: this segment has no market-trend data in the workbook.";
-  const miss = seg.missing.find((t) => t.name === name);
-  if (miss) return `No data available. The sheet says: ${miss.note}.`;
-  return "No data available: this tool is not tracked in the monthly trend sheet.";
+  const miss = seg && seg.missing.find((t) => t.name === name);
+  if (miss) return `Monthly trend: not publicly available (${miss.note.charAt(0).toLowerCase() + miss.note.slice(1)}).`;
+  return "Monthly trend: not publicly available.";
 }
 
 // Month-by-month insights computed only from the sheet's six monthly values.
