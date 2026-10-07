@@ -18,6 +18,24 @@ export const compactNum = new Intl.NumberFormat("en-US", { notation: "compact", 
 export const segFor = (cat) => (MONTHLY[cat] ? Object.assign({ cat, label: CATEGORIES[cat].label }, MONTHLY[cat]) : null);
 export const noteFor = (cat, name) => { const s = TRENDS.find((x) => x.cat === cat); const t = s && s.tools.find((x) => x.name === name); return t ? t.note : null; };
 export const rankCache = {};
+
+// ---------- The period the monthly numbers cover ----------
+// Built-in numbers cover Apr to Sep 2026; numbers from the daily refresh carry their own months.
+const LONG = { Jan: "January", Feb: "February", Mar: "March", Apr: "April", May: "May", Jun: "June", Jul: "July", Aug: "August", Sep: "September", Oct: "October", Nov: "November", Dec: "December" };
+export function periodOf(seg) {
+  const months = (seg && seg.months) || ["Apr", "May", "Jun", "Jul", "Aug", "Sep"];
+  const keys = seg && seg.monthKeys;
+  const yearOf = (k) => (keys ? +keys[k].slice(0, 4) : 2026);
+  const from = months[0], to = months[months.length - 1], y0 = yearOf(0), y1 = yearOf(months.length - 1);
+  return { from, to, fromLong: LONG[from], toLong: LONG[to], yearOf,
+    short: `${from} to ${to}`, label: y0 === y1 ? `${from} to ${to} ${y1}` : `${from} ${y0} to ${to} ${y1}` };
+}
+// When the first month is only partly covered, change is compared per day.
+export function perDayNote(seg) {
+  if (!seg) return "";
+  if (seg.monthKeys) return seg.firstDays < seg.firstMonthDays ? `Compared per day, because ${LONG[seg.months[0]]} covers ${seg.firstDays} days only.` : "";
+  return seg.cat === "orch" ? "Compared per day, because April covers 6-30 Apr only." : "";
+}
 export function rankSeg(seg) {
   if (rankCache[seg.cat]) return rankCache[seg.cat];
   const have = seg.tools;
@@ -59,7 +77,7 @@ export function monthInsights(seg, t) {
     ["Lowest month", `${M[lo]} (${monthVal(seg, m[lo])})`],
     ["Biggest monthly rise", mom[up] > 0 ? `${M[up - 1]} to ${M[up]} (${fmtPct(mom[up])})` : "None: every month fell"],
     ["Biggest monthly drop", mom[down] < 0 ? `${M[down - 1]} to ${M[down]} (${fmtPct(mom[down])})` : "None: every month rose"],
-    ["Apr to Sep", fmtPct(t.growth) + (seg.cat === "orch" ? " (per day; April covers 6-30 Apr)" : "")]
+    [periodOf(seg).short, fmtPct(t.growth) + (perDayNote(seg) ? " (compared per day)" : "")]
   ];
   return { mom, lines };
 }

@@ -1,8 +1,8 @@
 import { useStore } from "../store.js";
-import { segFor, fmtPct, monthVal } from "../lib/ranking.js";
+import { segFor, fmtPct, monthVal, periodOf } from "../lib/ranking.js";
 import { statusInfo, stClass, ratedParts, cap } from "../lib/status.js";
 
-// Small Apr -> Sep line, green when Sep is above Apr.
+// Small first-month -> last-month line, green when the last month is above the first.
 export function Sparkline({ m }) {
   const w = 96, h = 26, max = Math.max(...m), min = Math.min(...m), span = max - min || 1;
   const pts = m.map((v, k) => [4 + (k * (w - 8)) / (m.length - 1), h - 4 - ((v - min) / span) * (h - 8)]);
@@ -28,14 +28,15 @@ function Badge({ b, label, withRank }) {
 // Market status for one tool. compact = one short line (profile facts, hover header).
 export default function MarketStatus({ name, compact }) {
   const cat = useStore((s) => s.activeCat);
-  const seg = segFor(cat);
+  useStore((s) => s.dataVersion);   // redraw when the latest numbers arrive
+  const seg = segFor(cat), P = periodOf(seg);
   const { t, S, vr, m, badges, label, notes } = statusInfo(cat, name);
   if (compact) {
     return (
       <>
         {badges.length ? badges.map((b) => <Badge key={b.s} b={b} label={label} />)
           : t ? <span className="st-rank">#{vr.k} of {vr.n} by {m.lower}</span> : <span className="no-data">Not rated in our research</span>}
-        {t ? <span className="st-rank"> · {m.short} {fmtPct(t.growth)}, Apr to Sep</span> : <span className="no-data"> · monthly numbers not publicly available</span>}
+        {t ? <span className="st-rank"> · {m.short} {fmtPct(t.growth)}, {P.short}</span> : <span className="no-data"> · monthly numbers not publicly available</span>}
       </>
     );
   }
@@ -47,7 +48,7 @@ export default function MarketStatus({ name, compact }) {
       {S && S.evidence ? <><dt>Why</dt><dd className="st-ev">{S.evidence}</dd></> : null}
       {t ? (
         <>
-          <dt>{m.name}<small>Apr → Sep</small></dt>
+          <dt>{m.name}<small>{P.from} → {P.to}</small></dt>
           <dd className="mstat-trend"><Sparkline m={t.m} /><b className={t.growth >= 0 ? "up" : "down"}>{fmtPct(t.growth)}</b><span className="st-rank">{monthVal(seg, t.m[0])} → {monthVal(seg, t.m[5])}</span></dd>
           <dt></dt><dd className="st-ctx">{notes.join(" ")}</dd>
         </>

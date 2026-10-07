@@ -12,7 +12,9 @@ let state = {
   profile: { open: false, index: -1, opener: null },
   trendsOpen: false,
   topPage: { open: false, view: "overall", opener: null },
-  logosVersion: 0,         // bumped whenever a page's 3D textures finish loading (flat logos come from them)
+  logosVersion: 0,
+  dataVersion: 0,          // bumped when the latest monthly numbers arrive from the data API
+  marketUpdated: null,     // when those numbers were last refreshed (ISO date)         // bumped whenever a page's 3D textures finish loading (flat logos come from them)
   loading: { show: true, progress: 0, error: "" }
 };
 const listeners = new Set();

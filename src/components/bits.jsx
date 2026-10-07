@@ -1,7 +1,7 @@
 import { useStore, getState } from "../store.js";
 import { CATEGORIES } from "../lib/categories.js";
 import { logoFor } from "../lib/logos.js";
-import { fmtPct, noDataText, monthVal } from "../lib/ranking.js";
+import { fmtPct, noDataText, monthVal, periodOf } from "../lib/ranking.js";
 import { tipProps } from "./Tooltip.jsx";
 
 // Small shared pieces used by the card, the profile, the trends section and the charts page.
@@ -58,7 +58,7 @@ export function MonthlyChart({ seg, name, big }) {
           <div className="mcol" key={k}>
             <span className={"mbar" + (k === t.m.length - 1 ? " last" : "")} style={{ height: Math.max(2, (v / max) * 100) + "%" }}
               tabIndex={big ? 0 : -1}
-              {...tipProps(() => [`${seg.months[k]} 2026`, `${monthVal(seg, v)} ${seg.cat === "etl" ? "search index" : "downloads"}`,
+              {...tipProps(() => [`${seg.months[k]} ${periodOf(seg).yearOf(k)}`, `${monthVal(seg, v)} ${seg.cat === "etl" ? "search index" : "downloads"}`,
                 k ? `${fmtPct(v / t.m[k - 1] - 1)} vs ${seg.months[k - 1]}` : "First month in the data"])} />
             <span className="mlab">{seg.months[k]}</span>
           </div>
@@ -66,7 +66,7 @@ export function MonthlyChart({ seg, name, big }) {
       </div>
       {big && (
         <div className="mvals">
-          <span>Apr <b>{monthVal(seg, t.m[0])}</b></span><span>Sep <b>{monthVal(seg, t.m[5])}</b></span>
+          <span>{seg.months[0]} <b>{monthVal(seg, t.m[0])}</b></span><span>{seg.months[5]} <b>{monthVal(seg, t.m[5])}</b></span>
           <span>Change <b className={t.growth >= 0 ? "up" : "down"}>{fmtPct(t.growth)}</b></span>
         </div>
       )}

@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { useStore, getState, closeProfile, profileGo, step } from "../store.js";
 import { CATEGORIES, pad, host, reduceMotion } from "../lib/categories.js";
-import { segFor } from "../lib/ranking.js";
+import { segFor, periodOf } from "../lib/ranking.js";
 import { Icon, Logo, TierBadge, Plans, MonthlyChart } from "./bits.jsx";
 import MarketStatus from "./MarketStatus.jsx";
 import { ConnProfile } from "./Connectors.jsx";
@@ -12,6 +12,7 @@ const sentences = (text) => text.split(/(?<=\.)\s+(?=[A-Z])/);
 // ---------- Full profile: the peek button expands into a full-page view ----------
 export default function Profile() {
   const cat = useStore((s) => s.activeCat);
+  useStore((s) => s.dataVersion);   // redraw when the latest numbers arrive
   const { open, index, opener } = useStore((s) => s.profile);
   const [shown, setShown] = useState(false);
   const ref = useRef(null);
@@ -106,7 +107,7 @@ export default function Profile() {
 
         <section className="pf-pricing pf-trend" aria-labelledby="pfTrendTitle">
           <div className="pf-pricing-head">
-            <h2 id="pfTrendTitle">Market status and trend, Apr to Sep 2026</h2>
+            <h2 id="pfTrendTitle">{`Market status and trend, ${periodOf(segFor(cat)).label}`}</h2>
             <span className="src-note pf-trend-rank"></span>
           </div>
           <div className="pf-trend-chart"><div className="pf-status"><MarketStatus name={t.name} /></div>{hasTrend && <MonthlyChart seg={seg} name={t.name} big />}</div>

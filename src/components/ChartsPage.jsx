@@ -2,16 +2,17 @@ import { useLayoutEffect, useRef } from "react";
 import { useStore, closeTopPage, setTopView, switchCategory, openTop } from "../store.js";
 import { CATEGORIES, shortLabel } from "../lib/categories.js";
 import { sfx } from "../lib/sfx.js";
-import { segFor, rankSeg, byGrowth, byPop, fmtPct, popShort, popText, noteFor, gapsFor } from "../lib/ranking.js";
+import { segFor, rankSeg, byGrowth, byPop, fmtPct, popShort, popText, noteFor, gapsFor, periodOf } from "../lib/ranking.js";
 import { statusLists, numFor, sheetStatus, metricFor, ratedFor, NUMBER_SEGS, ST_LABEL } from "../lib/status.js";
 import { Icon, Logo, MonthlyChart, indexOfTool } from "./bits.jsx";
 import { tipProps, hideTip } from "./Tooltip.jsx";
 
 const VIEW_TEXT = {
   overall: ["Overall", "Average of the growth rank and the popularity rank."],
-  growth: ["By growth", "Change from Apr to Sep 2026."],
+  growth: ["By growth", ""],   // text depends on the months in the data, see viewText()
   popularity: ["By popularity", "6-month volume."]
 };
+const viewText = (view, seg) => view === "growth" ? `Change from ${periodOf(seg).label}.` : VIEW_TEXT[view][1];
 
 function ToolButton({ seg, cat, name, cls }) {
   const c = cat || seg.cat;
@@ -37,10 +38,10 @@ function GrowthBar({ g, lo, hi }) {
 
 // Widely used / Rising / Emerging, each with the researched evidence for every tool.
 function StatusCards({ cat }) {
-  const seg = segFor(cat), L = statusLists(cat), m = metricFor(cat);
+  const seg = segFor(cat), L = statusLists(cat), m = metricFor(cat), P = periodOf(seg);
   const DESC = NUMBER_SEGS.includes(cat)
     ? { widely: `Highest volume (${seg ? seg.popLabel : ""}).`,
-        rising: cat === "etl" ? "Ranked from our research into adoption. Google searches fell for every ETL / ELT tool from Apr to Sep, so the search change shown is still negative." : "Highest growth from Apr to Sep, counting only tools that grew.",
+        rising: cat === "etl" ? `Ranked from our research into adoption. Google searches fell for every ETL / ELT tool from ${P.short}, so the search change shown is still negative.` : `Highest growth from ${P.short}, counting only tools that grew.`,
         emerging: "" }
     : { widely: "Ranked from our research into adoption.", rising: "Ranked from our research into adoption. Tools whose downloads fell are left out.", emerging: "Ranked from our research into adoption." };
   return (
@@ -52,7 +53,7 @@ function StatusCards({ cat }) {
           <section className="tpg-card" key={k}>
             <h2>{`${ST_LABEL[k]}: top ${items.length || 3}`}</h2>
             <p className="tpg-sub">{DESC[k]}</p>
-            {!items.length ? <p className="no-data">No tool rose from Apr to Sep, so there is no Rising list.</p> : (
+            {!items.length ? <p className="no-data">{`No tool rose from ${P.short}, so there is no Rising list.`}</p> : (
               <ol className="tlist">
                 {items.map((x, idx) => {
                   const t = numFor(cat, x.name), S = sheetStatus(cat, x.name);
@@ -63,7 +64,7 @@ function StatusCards({ cat }) {
                       <ToolButton cat={cat} name={x.name} cls="hwho" />
                       <span className="tl-val">{t
                         ? (k === "widely" ? <><b>{popShort(seg, t.pop)}</b> <small>{cat === "etl" ? "index" : "downloads"}</small></>
-                          : <><b className={t.growth >= 0 ? "up" : "down"}>{fmtPct(t.growth)}</b> <small>{m.lower}, Apr to Sep</small></>)
+                          : <><b className={t.growth >= 0 ? "up" : "down"}>{fmtPct(t.growth)}</b> <small>{`${m.lower}, ${P.short}`}</small></>)
                         : <small>No public monthly numbers</small>}</span>
                       {note && <span className="tl-note">{note}</span>}
                     </li>
@@ -115,7 +116,7 @@ function Body({ cat, view }) {
       {/* 1. Bar chart for the chosen view */}
       <section className="tpg-card">
         <h2>{`${VIEW_TEXT[view][0]}: top 5`}</h2>
-        <p className="tpg-sub">{VIEW_TEXT[view][1] + (view === "popularity" || view === "overall" ? ` Popularity = ${seg.popLabel}${seg.cat === "etl" ? " (Fivetran = 100)" : ""}.` : "")}</p>
+        <p className="tpg-sub">{viewText(view, seg) + (view === "popularity" || view === "overall" ? ` Popularity = ${seg.popLabel}${seg.cat === "etl" ? " (Fivetran = 100)" : ""}.` : "")}</p>
         {view === "overall" && <div className="hkey"><span><i className="hsw g"></i>Growth</span><span><i className="hsw p"></i>Popularity</span></div>}
         <ol className="hchart">
           {top.map((r) => (
@@ -134,14 +135,14 @@ function Body({ cat, view }) {
           ))}
         </ol>
         {seg.cat === "etl" && view !== "popularity" && Math.max(...gs) < 0 && (
-          <p className="tpg-note">Every ETL / ELT tool had lower search interest in Sep than in Apr, so the growth bars all point left of zero.</p>
+          <p className="tpg-note">{`Every ETL / ELT tool had lower search interest in ${periodOf(seg).to} than in ${periodOf(seg).from}, so the growth bars all point left of zero.`}</p>
         )}
         {cautions.length > 0 && <ul className="tpg-cautions">{cautions.map(([nm, n]) => <li key={nm}><b>{nm + ": "}</b>{n}</li>)}</ul>}
       </section>
 
       {/* 2. Month by month for the same five tools */}
       <section className="tpg-card">
-        <h2>Month by month, Apr to Sep 2026</h2>
+        <h2>{`Month by month, ${periodOf(seg).label}`}</h2>
         <p className="tpg-sub">{`${seg.unit}. Each small chart has its own scale; hover a bar for the exact value.`}</p>
         <div className="mgrid">
           {top.map((r) => (
@@ -165,6 +166,7 @@ function Body({ cat, view }) {
 // ---------- Charts page: one page per segment, separate from the 3D page of all tools ----------
 export default function ChartsPage() {
   const cat = useStore((s) => s.activeCat);
+  useStore((s) => s.dataVersion);   // redraw when the latest numbers arrive
   const { open, view } = useStore((s) => s.topPage);
   const scrollRef = useRef(null);
   const backRef = useRef(null);
@@ -198,7 +200,7 @@ export default function ChartsPage() {
           <div className="eyebrow">Market trends · Researched data</div>
           <h1 id="tpTitle">{`Top 5 · ${c.label}`}</h1>
           <p className="tpg-lede">{rows.length
-            ? `${seg.unit}, Apr to Sep 2026. ${seg.method} ${rows.length} of ${c.tools.length} tools on this page have data.`
+            ? `${seg.unit}, ${periodOf(seg).label}. ${seg.method} ${rows.length} of ${c.tools.length} tools on this page have data.`
             : "Monthly trend: not publicly available for this segment. The lists below are ranked from our research into adoption."}</p>
           <div className="tpg-views" role="radiogroup" aria-label="Rank by" hidden={!rows.length}>
             {Object.keys(VIEW_TEXT).map((v) => (

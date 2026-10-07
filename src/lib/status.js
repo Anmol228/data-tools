@@ -1,9 +1,9 @@
 import { STATUS } from "../data.js";
 import { CATEGORIES } from "./categories.js";
-import { segFor, rankSeg, byGrowth, byPop, medianOf } from "./ranking.js";
+import { segFor, rankSeg, byGrowth, byPop, medianOf, periodOf, perDayNote } from "./ranking.js";
 
 // ---------- Market status ----------
-// 1. Tools WITH monthly numbers: trend, change, "Widely used" from volume, "Rising" only if Sep > Apr.
+// 1. Tools WITH monthly numbers: trend, change, "Widely used" from volume, "Rising" only if the last month beats the first.
 // 2. Tools WITHOUT monthly numbers: "Monthly numbers: Not publicly available", plus the researched
 //    Status, Evidence and Rank in category. Monthly numbers are never invented.
 
@@ -15,6 +15,8 @@ export function numFor(cat, name) { const seg = segFor(cat); return (seg && seg.
 export function sheetStatus(cat, name) { const s = STATUS[cat]; return (s && s.tools[name]) || null; }
 
 const listCache = {};
+// Called when newer monthly numbers arrive, so lists and ranks are worked out again.
+export function resetStatusCache() { Object.keys(listCache).forEach((k) => delete listCache[k]); }
 // Category lists shown in the trends bar, the pop-up and the Charts page.
 export function statusLists(cat) {
   if (listCache[cat]) return listCache[cat];
@@ -26,14 +28,14 @@ export function statusLists(cat) {
       widely: seg ? byPop(seg).slice(0, 3).map((r) => ({ name: r.t.name, why: "Highest monthly volume" })) : [],
       // ETL / ELT: the researched Rising rank. Orchestration and BI: highest growth among tools that grew.
       rising: cat === "etl" && STATUS.etl && STATUS.etl.lists ? STATUS.etl.lists.rising
-        : rows.length ? byGrowth(seg).filter((r) => r.t.growth > 0).slice(0, 3).map((r) => ({ name: r.t.name, why: "Highest growth, Apr to Sep" })) : [],
+        : rows.length ? byGrowth(seg).filter((r) => r.t.growth > 0).slice(0, 3).map((r) => ({ name: r.t.name, why: `Highest growth, ${periodOf(seg).short}` })) : [],
       emerging: []
     };
   } else {
     const L = (STATUS[cat] && STATUS[cat].lists) || { widely: [], rising: [], emerging: [] };
     out = {
       widely: L.widely,
-      // Rising is shown only where the numbers (if any) confirm Sep is above Apr.
+      // Rising is shown only where the numbers (if any) confirm the last month is above the first.
       rising: L.rising.filter((x) => { const t = numFor(cat, x.name); return !t || t.growth > 0; }),
       emerging: L.emerging
     };
@@ -57,22 +59,26 @@ export const metricFor = (cat) => METRIC[cat] || { name: "Python downloads", low
 
 // How each status is decided, per segment, in plain words.
 const RESEARCH = "our research into adoption (company reports, industry studies and other public evidence)";
-const RATED = {
-  etl: { widely: "the most searched tools on Google, April to September.",
-         rising: `based on ${RESEARCH}. Google searches fell for every ETL tool in this period, so searches alone can't show growth.` },
-  orch: { widely: "the most downloaded tools, April to September.", rising: "downloads grew from April to September." },
-  bi: { widely: "the most downloaded SDKs, April to September.", rising: "downloads grew from April to September." },
-  stream: { note: "None of these tools publish monthly download numbers.",
-            widely: `the leading tools in ${RESEARCH}.`, rising: "the tools our research shows gaining adoption fastest.", emerging: "newer tools our research shows gaining early adoption." }
-};
-const RATED_MIXED = { note: "Some tools here publish download numbers; most commercial ones don't.",
-  widely: `the leading tools in ${RESEARCH}.`,
-  rising: "downloads grew from April to September. For tools that publish no download numbers, our research shows them gaining adoption. Tools whose downloads fell are not marked Rising.",
-  emerging: "newer tools our research shows gaining early adoption." };
+// The months in these sentences follow the segment's monthly numbers (e.g. "April to September").
+function ratedTexts(cat) {
+  const P = periodOf(segFor(cat)), span = `${P.fromLong} to ${P.toLong}`;
+  const RATED = {
+    etl: { widely: `the most searched tools on Google, ${span}.`,
+           rising: `based on ${RESEARCH}. Google searches fell for every ETL tool in this period, so searches alone can't show growth.` },
+    orch: { widely: `the most downloaded tools, ${span}.`, rising: `downloads grew from ${span}.` },
+    bi: { widely: `the most downloaded SDKs, ${span}.`, rising: `downloads grew from ${span}.` },
+    stream: { note: "None of these tools publish monthly download numbers.",
+              widely: `the leading tools in ${RESEARCH}.`, rising: "the tools our research shows gaining adoption fastest.", emerging: "newer tools our research shows gaining early adoption." }
+  };
+  return RATED[cat] || { note: "Some tools here publish download numbers; most commercial ones don't.",
+    widely: `the leading tools in ${RESEARCH}.`,
+    rising: `downloads grew from ${span}. For tools that publish no download numbers, our research shows them gaining adoption. Tools whose downloads fell are not marked Rising.`,
+    emerging: "newer tools our research shows gaining early adoption." };
+}
 export const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
 // [label, meaning] pairs for the statuses this segment actually shows.
 export function ratedParts(cat) {
-  const R = RATED[cat] || RATED_MIXED, L = statusLists(cat), out = [];
+  const R = ratedTexts(cat), L = statusLists(cat), out = [];
   if (R.widely) out.push(["Widely used", R.widely]);
   if (R.rising && L.rising.length) out.push(["Rising", R.rising]);
   if (R.emerging && L.emerging.length) out.push(["Emerging", R.emerging]);
@@ -100,7 +106,7 @@ export function statusInfo(cat, name) {
     const seg = segFor(cat), med = medianGrowth(cat);
     rel = med != null && seg.tools.length >= 3 ? (1 + t.growth) / (1 + med) - 1 : null;
     notes.push(m.what);
-    if (cat === "orch") notes.push("Compared per day, because April covers 6-30 Apr only.");
+    if (perDayNote(seg)) notes.push(perDayNote(seg));
     if (cat === "etl" && med < 0) notes.push(`Searches fell for every ETL tool in this period (typical tool ${fmtSigned(med)}).`);
     if (rel != null) notes.push(`Compared with the ${label} average: ${fmtSigned(rel)}.`);
     if (vr && !badges.some((b) => b.s === "Widely used")) notes.push(`#${vr.k} of ${vr.n} by ${m.lower} in this segment.`);

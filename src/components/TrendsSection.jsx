@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useRef } from "react";
 import { useStore, openTrends, closeTrends, openTopPage, openTop } from "../store.js";
 import { CATEGORIES } from "../lib/categories.js";
-import { segFor, rankSeg, popShort, fmtPct, medianOf } from "../lib/ranking.js";
+import { segFor, rankSeg, popShort, fmtPct, medianOf, periodOf } from "../lib/ranking.js";
 import { statusLists, numFor, metricFor, ST_LABEL } from "../lib/status.js";
 import { Icon, Logo, indexOfTool } from "./bits.jsx";
 import { RatedBox } from "./MarketStatus.jsx";
@@ -17,7 +17,7 @@ function TrendPop({ cat }) {
     <>
       <div className="tp-seg">{`Market trends · ${CATEGORIES[cat].label}`}</div>
       {rows.length ? (
-        <p className="tp-line">{`Typical change in ${metricFor(cat).lower}: `}<b>{fmtPct(medianOf(seg.tools.map((t) => t.growth)))}</b>{` across ${rows.length} tools with monthly numbers, Apr to Sep 2026.`}</p>
+        <p className="tp-line">{`Typical change in ${metricFor(cat).lower}: `}<b>{fmtPct(medianOf(seg.tools.map((t) => t.growth)))}</b>{` across ${rows.length} tools with monthly numbers, ${periodOf(seg).label}.`}</p>
       ) : (
         <p className="tp-line no-data">Monthly trend: not publicly available for this segment. Statuses below come from our research into adoption.</p>
       )}
@@ -73,6 +73,7 @@ function Group({ cat, k }) {
 
 export default function TrendsSection() {
   const cat = useStore((s) => s.activeCat);
+  useStore((s) => s.dataVersion);   // redraw when the latest numbers arrive
   const trendsOpen = useStore((s) => s.trendsOpen);
   const popRef = useRef(null);
   const btnRef = useRef(null);
