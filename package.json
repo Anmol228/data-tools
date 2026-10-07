@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "netlify:dev": "netlify dev",
-    "test": "node scripts/test-views.mjs && node scripts/test-market.mjs"
+    "test": "node scripts/test-views.mjs && node scripts/test-market.mjs && node scripts/test-engage.mjs"
   },
   "dependencies": {
     "@netlify/blobs": "^8.1.0",
